@@ -189,7 +189,7 @@
 
             </div>
         </div>
-        <div class="bg-dark py-4  w-100">
+        <div class="py-4 w-100">
             <p class="mx-auto fs-5">Teljaoui Mohamed © 2024. All Rights Reserved.</p>
         </div>
     </footer>

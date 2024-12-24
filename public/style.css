@@ -106,14 +106,14 @@ li {
 
 
 .header-bottom .logo img,
-.phone .logo img{
+.phone .logo img {
     width: 30px;
     height: 30px;
     margin-right: 7px;
 }
 
 .header-bottom .logo span,
-.phone .logo span{
+.phone .logo span {
     font-size: 20px;
     margin-top: 3px;
     color: var(--color-8967B3);
@@ -293,7 +293,8 @@ li {
     background-repeat: repeat;
     background-size: cover;
     background-attachment: fixed;
-    height: 30vh;
+    align-items: center;
+    height: 40vh;
 }
 
 .home-reserve h5 {
@@ -385,6 +386,7 @@ footer a::before {
     background-color: var(--color-CB80AB);
     transition: width 0.5s ease;
 }
+
 footer a:hover {
     color: var(--color-CB80AB);
 }
@@ -609,6 +611,8 @@ footer .media i {
     .home-reserve div {
         background-position-x: 1000px;
     }
+
+ 
 }
 
 
