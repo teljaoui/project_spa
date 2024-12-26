@@ -20,3 +20,12 @@ Route::get('/', function () {
 Route::get('/appointment' , function(){
     return view('appointment');
 });
+Route::get('/available' , function(){
+    return view('available');
+});
+Route::get('/confirmed' , function(){
+    return view('confirmed');
+});
+Route::get('/done' , function(){
+    return view('/done');
+});

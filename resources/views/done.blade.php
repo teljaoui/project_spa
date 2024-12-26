@@ -32,29 +32,54 @@
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>2. <strong>Possible time</strong></span>
-                        <hr>
+                        <span class="active">2. <strong>Possible time</strong></span>
+                        <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>3. <strong>confirmed</strong></span>
-                        <hr>
+                        <span class="active">3. <strong>confirmed</strong></span>
+                        <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>4. <strong>Done</strong></span>
-                        <hr>
+                        <span class="active">4. <strong>Done</strong></span>
+                        <hr class="active">
                     </div>
                 </div>
             </div>
-            <div class="content">
-                <form action="" method="post">
-                    <div class="form-group text-center">
-                        <p>Please select the date of your visit.</p>
-                        <input type="date" id="date-select" name="date-select" class="form-control">
+            <div class="available my-2">
+                <div class="confirmed text-center">
+                    <p>Check the information entered.</p>
+                    <div class="donne">
+                        <div class="mb-4">
+                            <a href="" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <span>Date Of Visit:</span>
+                                <p>12/12/2025</p>
+                            </li>
+                            <li>
+                                <span>Visiting Time:</span>
+                                <p>12:00 am</p>
+                            </li>
+                            <li>
+                                <span>First Name:</span>
+                                <p>Mohamed</p>
+                            </li>
+                            <li>
+                                <span>Last Name:</span>
+                                <p>Teljaoui</p>
+                            </li>
+                            <li>
+                                <span>Phone Nulber:</span>
+                                <p>0652583234</p>
+                            </li>
+                        </ul>
+                        <form action="" class="text-center pb-4">
+                            <span>If the information is correct click on the button below</span><br><br>
+                            <button type="submit" class="next">Confirmed</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="submit" value="Next">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </section>

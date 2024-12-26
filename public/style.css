@@ -7,11 +7,14 @@
     --color-E6D9A2: #E6D9A2;
     --color-323232: #323232;
     --color-9A9A9A: #9A9A9A;
+    --color-cccccc: #cccccc;
     --color-e5e7eb: #e5e7eb;
     --color-1F2544: #1F2544;
     --color-212121: #212121;
     --font-lobster: "Lobster", serif;
     --font-Montserrat: "Montserrat", serif;
+    --font-droid-serif: "droid-serif", serif;
+    --font-Raleway: "Raleway", sans-serif:
 }
 
 
@@ -371,7 +374,7 @@ footer a {
     text-decoration: none;
     font-size: 17px;
     color: #fff;
-    font-family: droid-serif, serif;
+    font-family: var(--font-droid-serif);
     padding-bottom: 10px;
     position: relative;
     transition: 0.5s ease-in-out;
@@ -398,7 +401,7 @@ footer a:hover::before {
 
 footer h5 {
     color: #fff;
-    font-family: Raleway, sans-serif;
+    font-family: var(--font-Raleway);
     font-size: 25px;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -407,7 +410,7 @@ footer h5 {
 footer p {
     font-size: 14px;
     color: #fff;
-    font-family: droid-serif, serif;
+    font-family: var(--font-droid-serif);
     width: 80%;
 }
 
@@ -480,7 +483,7 @@ footer .media i {
 
 .appointment .header-appointment span {
     font-size: 15px;
-    font-family: droid-serif, serif;
+    font-family: var(--font-droid-serif);
     font-weight: 600;
     color: var(--color-9A9A9A);
 }
@@ -512,8 +515,163 @@ footer .media i {
     border: 1px solid var(--color-CB80AB);
 }
 
+.appointment .content form p,
+.appointment .available p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-1F2544);
+    font-family: var(--font-droid-serif);
+}
+
+.appointment .navigation {
+    display: flex;
+    flex-direction: row;
+}
+
+.appointment .submit {
+    font-size: 18px;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: var(--color-CB80AB);
+    border: 0px;
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    transition: 0.5s ease-in-out;
+}
+
+.appointment .submit:hover {
+    background-color: var(--color-8967B3);
+}
+
+.appointment .appointment span {
+    border: 1px solid var(--color-9A9A9A);
+    padding: 10px;
+    border-radius: 50%;
+}
+
 /*.appointment ends*/
 
+/*available*/
+.appointment .available .time {
+    width: 90%;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.appointment .available .time form {
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.appointment .available .time button {
+    font-size: 22px;
+    padding: 8px 15px;
+    background-color: #fff;
+    border: 1px solid var(--color-cccccc);
+    transition: 0.5s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+}
+
+.appointment .available .time button:hover {
+    border: 1.2px solid var(--color-CB80AB);
+    transform: scale(1.1);
+}
+
+.appointment .available .time button:hover i {
+    background-color: var(--color-CB80AB);
+}
+
+.appointment .available .time button span {
+    font-family: var(--font-droid-serif);
+    margin-left: 5px;
+}
+
+.appointment .available .time button i {
+    transition: 0.5s ease-in-out;
+    color: var(--color-cccccc);
+    border-radius: 50%;
+}
+
+/*available ends*/
+
+/*confirmed*/
+.appointment .available .confirmed {
+    width: 80%;
+    margin-inline: auto;
+}
+
+.appointment .available .confirmed label {
+    font-size: 16px;
+    font-family: var(--font-droid-serif);
+    color: var(--color-9A9A9A);
+}
+
+.appointment .available .confirmed input:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid var(--color-CB80AB);
+}
+
+.appointment .available .confirmed .next,
+.appointment .available .confirmed .back {
+    font-size: 17px;
+    padding: 5px 30px;
+    background-color: var(--color-CB80AB);
+    transition: 0.5s ease-in-out;
+    color: #fff;
+    text-transform: uppercase;
+    border: 0px;
+    font-weight: 600;
+    transition: 0.5s ease-in-out;
+}
+
+.appointment .available .confirmed .next:hover,
+.appointment .available .confirmed .back:hover {
+    background-color: var(--color-624E88);
+}
+
+.appointment .available .confirmed .back {
+    background-color: var(--color-9A9A9A);
+    text-decoration: none;
+}
+
+.appointment .available .confirmed .donne {
+    width: 50%;
+    margin-inline: auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.102);
+    text-align: start;
+    padding: 10px;
+}
+
+.appointment .available .confirmed .donne ul li {
+    display: flex;
+}
+
+.appointment .available .confirmed .donne ul li span {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-droid-serif);
+    color: var(--color-9A9A9A);
+    margin-right: 10px;
+}
+
+.appointment .available .confirmed .donne ul li p {
+    font-size: 18px;
+}
+
+.appointment .available .confirmed .donne form span {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: var(--font-droid-serif);
+    color: var(--color-1F2544);
+}
+
+/*confirmed ends*/
 @media (max-width:1280px) {
     .home-top {
         background-position-x: 1800px;
@@ -542,6 +700,21 @@ footer .media i {
 
     .appointment .title {
         background-position-y: 0px;
+    }
+
+    .appointment .header-appointment span {
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width:770px) {
+    .appointment .available .confirmed .donne ul li {
+        display: flex;
+        flex-direction: column;
+    }
+    .appointment .available .confirmed .donne {
+        width: 100%;
     }
 }
 
@@ -707,6 +880,10 @@ footer .media i {
     .appointment .title h5 {
         font-size: 30px;
     }
+
+    .appointment .header-appointment span {
+        font-size: 10px;
+    }
 }
 
 
@@ -722,6 +899,31 @@ footer .media i {
     .appointment .title h5 {
         font-size: 20px;
         margin-top: 150px !important;
+    }
+
+    .appointment .content {
+        width: 60% !important;
+    }
+
+    .appointment .content form p {
+        font-size: 12px;
+    }
+
+    .appointment .submit {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .appointment .header-appointment strong {
+        display: none;
+    }
+
+    .appointment .header-appointment hr {
+        height: 5px;
+    }
+
+    .appointment .available .time button {
+        font-size: 18px;
     }
 }
 

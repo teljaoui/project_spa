@@ -23,13 +23,13 @@
             <ul>
                 <li><a href="/" class="navigation" onclick="closenavhome()">Home <i
                             class="fa-solid fa-arrow-right"></i></a></li>
-                <li><a href="#services" class="navigation" onclick="closenavhome()">Service <i
+                <li><a href="/#services" class="navigation" onclick="closenavhome()">Service <i
                             class="fa-solid fa-arrow-right"></i></a></li>
-                <li><a href="#home-contact" class="navigation" onclick="closenavhome()">Contact <i
+                <li><a href="/#home-contact" class="navigation" onclick="closenavhome()">Contact <i
                             class="fa-solid fa-arrow-right"></i></a></li>
             </ul>
             <ul>
-                <li class="reserve"><a href="" onclick="closenavhome()">Réserver</a></li>
+                <li class="reserve"><a href="/appointment" onclick="closenavhome()">Réserver</a></li>
             </ul>
             <ul class="contact">
                 <hr class="mx-4 bg-light my-3">

@@ -32,8 +32,8 @@
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>2. <strong>Possible time</strong></span>
-                        <hr>
+                        <span class="active">2. <strong>Possible time</strong></span>
+                        <hr class="active">
                     </div>
                     <div class="col-3">
                         <span>3. <strong>confirmed</strong></span>
@@ -45,16 +45,42 @@
                     </div>
                 </div>
             </div>
-            <div class="content">
-                <form action="" method="post">
-                    <div class="form-group text-center">
-                        <p>Please select the date of your visit.</p>
-                        <input type="date" id="date-select" name="date-select" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="submit" value="Next">
-                    </div>
-                </form>
+            <div class="available my-2">
+                <div class="form-group">
+                    <p>Here are the available time slots. Click on a slot to proceed with booking.</p>
+                </div>
+                <div class="time my-2 text-center">
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                    <form action="" method="post">
+                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
