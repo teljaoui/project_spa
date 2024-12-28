@@ -29,3 +29,18 @@ Route::get('/confirmed' , function(){
 Route::get('/done' , function(){
     return view('/done');
 });
+Route::get('/admin/login' , function(){
+    return view('admin/login');
+});
+Route::get('/admin/index' , function(){
+    return view('admin/index');
+});
+Route::get('/admin/updatepassword' , function(){
+    return view('admin/updatepassword');
+});
+Route::get('/admin/add', function(){
+    return view('/admin/add');
+});
+Route::get('/admin/past', function(){
+    return view('/admin/past');
+});

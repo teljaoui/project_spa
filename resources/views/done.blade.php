@@ -70,7 +70,7 @@
                                 <p>Teljaoui</p>
                             </li>
                             <li>
-                                <span>Phone Nulber:</span>
+                                <span>Phone Number:</span>
                                 <p>0652583234</p>
                             </li>
                         </ul>
