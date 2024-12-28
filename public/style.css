@@ -73,6 +73,7 @@ header {
     color: #fff;
     background-color: var(--color-624E88);
 }
+
 .header-admin .dropdown-toggle span {
     margin-right: 10px;
 }
@@ -589,7 +590,8 @@ footer .media i {
 /*.appointment ends*/
 
 /*available*/
-.appointment .available .time {
+.appointment .available .time,
+.admin-time .time {
     width: 90%;
     margin-inline: auto;
     display: flex;
@@ -597,12 +599,14 @@ footer .media i {
     justify-content: space-between;
 }
 
-.appointment .available .time form {
+.appointment .available .time form,
+.admin-time .time form {
     margin-left: 10px !important;
     margin-bottom: 10px !important;
 }
 
-.appointment .available .time button {
+.appointment .available .time button,
+.admin-time .time button {
     font-size: 22px;
     padding: 8px 15px;
     background-color: #fff;
@@ -612,21 +616,24 @@ footer .media i {
     align-items: center;
 }
 
-.appointment .available .time button:hover {
+.appointment .available .time button:hover .admin-time .time button:hover {
     border: 1.2px solid var(--color-CB80AB);
     transform: scale(1.1);
 }
 
-.appointment .available .time button:hover i {
+.appointment .available .time button:hover i,
+.admin-time .time button:hover i {
     background-color: var(--color-CB80AB);
 }
 
-.appointment .available .time button span {
+.appointment .available .time button span,
+.admin-time .time button span {
     font-family: var(--font-droid-serif);
     margin-left: 5px;
 }
 
-.appointment .available .time button i {
+.appointment .available .time button i,
+.admin-time .time button i {
     transition: 0.5s ease-in-out;
     color: var(--color-cccccc);
     border-radius: 50%;
@@ -653,7 +660,9 @@ footer .media i {
 }
 
 .appointment .available .confirmed .next,
-.appointment .available .confirmed .back {
+.appointment .available .confirmed .back,
+.today .next,
+.today .back {
     font-size: 17px;
     padding: 5px 30px;
     background-color: var(--color-CB80AB);
@@ -666,11 +675,14 @@ footer .media i {
 }
 
 .appointment .available .confirmed .next:hover,
-.appointment .available .confirmed .back:hover {
+.appointment .available .confirmed .back:hover,
+.today .next:hover,
+.today .back:hover {
     background-color: var(--color-624E88);
 }
 
-.appointment .available .confirmed .back {
+.appointment .available .confirmed .back,
+.today .back {
     background-color: var(--color-9A9A9A);
     text-decoration: none;
 }
@@ -683,11 +695,14 @@ footer .media i {
     padding: 10px;
 }
 
-.appointment .available .confirmed .donne ul li {
+.appointment .available .confirmed .donne ul li,
+.today ul li {
     display: flex;
 }
 
-.appointment .available .confirmed .donne ul li span {
+.appointment .available .confirmed .donne ul li span,
+.today ul li span {
+
     font-size: 20px;
     font-weight: 700;
     font-family: var(--font-droid-serif);
@@ -695,11 +710,14 @@ footer .media i {
     margin-right: 10px;
 }
 
-.appointment .available .confirmed .donne ul li p {
+.appointment .available .confirmed .donne ul li p,
+.today ul li p {
+
     font-size: 20px;
 }
 
-.appointment .available .confirmed .donne form span {
+.appointment .available .confirmed .donne form span,
+.today .admin-span {
     font-size: 14px;
     text-transform: uppercase;
     font-family: var(--font-droid-serif);
@@ -775,6 +793,29 @@ footer .media i {
     color: var(--color-1F2544);
 }
 
+.admin .today .submit {
+    font-size: 18px;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: var(--color-CB80AB);
+    border: 0px;
+    float: right;
+    margin-top: 10px;
+    transition: 0.5s ease-in-out;
+    font-weight: 700;
+}
+
+.admin .today .submit:hover {
+    background-color: var(--color-624E88);
+}
+
+.today p {
+    font-size: 18px;
+    color: var(--color-1F2544);
+    font-weight: 550;
+}
+
 /*admin ends*/
 @media (max-width:1280px) {
     .home-top {
@@ -814,6 +855,11 @@ footer .media i {
 
 @media (max-width:770px) {
     .appointment .available .confirmed .donne ul li {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .today ul li {
         display: flex;
         flex-direction: column;
     }
@@ -1063,12 +1109,13 @@ footer .media i {
         height: 5px;
     }
 
-    .appointment .available .time button {
+    .appointment .available .time button,
+    .admin-time .time button {
         font-size: 18px;
     }
 }
 
-@media (max-width: 326px) {
+@media (max-width: 333px) {
 
     .home-reserve a,
     .home-top .content a {
@@ -1079,6 +1126,11 @@ footer .media i {
     .home-service .services-content img {
         width: 60px;
         height: 60px;
+    }
+
+    .appointment .available .time button,
+    .admin-time .time button {
+        font-size: 12px;
     }
 
 }
