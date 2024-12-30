@@ -810,10 +810,51 @@ footer .media i {
     background-color: var(--color-624E88);
 }
 
+.admin .today .call {
+    margin-left: 30px;
+    margin-right: 10px;
+    color: #bf4800;
+    font-size: 19px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 .today p {
     font-size: 18px;
     color: var(--color-1F2544);
     font-weight: 550;
+}
+
+.list-time {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list-time div {
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.list-time button {
+    background-color: #fff;
+    border: 0px;
+    margin-left: 10px;
+    transition: 0.5s ease-in-out;
+}
+
+.list-time button:hover {
+    color: red;
+    transform: scale(1.1);
+}
+
+.list-time  .admin-time {
+    font-size: 22px;
+    padding: 8px 15px;
+    background-color: #fff;
+    border: 1px solid var(--color-cccccc);
+    transition: 0.5s ease-in-out;
+    display: inline-flex;
+    align-items: center;
 }
 
 /*admin ends*/

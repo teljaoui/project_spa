@@ -11,6 +11,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="/admin/index"><i class="fa-solid fa-calendar-week"></i><span>Today's Appointments</span></a></li>
+                    <li><a class="dropdown-item" href="/admin/management"><i class="fa-solid fa-list-check"></i><span>Management Appointments</span></a></li>
                     <li><a class="dropdown-item" href="/admin/add"><i class="fa-solid fa-calendar-plus"></i><span>Add An Appointment</span></a></li>
                     <li><a class="dropdown-item" href="/admin/past"><i class="fa-solid fa-outdent"></i><span>Past Appointment</span></a></li>
                     <li><a class="dropdown-item" href="/admin/updatepassword"><i class="fa-solid fa-pen-nib"></i><span>Update Password</span></a></li>

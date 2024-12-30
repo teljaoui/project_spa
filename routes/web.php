@@ -44,3 +44,9 @@ Route::get('/admin/add', function(){
 Route::get('/admin/past', function(){
     return view('/admin/past');
 });
+Route::get('/admin/details' , function(){
+    return view('/admin/details');
+});
+Route::get('/admin/management' , function(){
+    return view('/admin/management');
+});
