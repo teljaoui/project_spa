@@ -37,8 +37,8 @@
                                 <td>18</td>
                                 <td class="phonetable">18-12-2024</td>
                                 <td>18:00 am</td>
-                                <td>Karima</td>
-                                <td class="phonetable">Salihi</td>
+                                <td>Mohamed</td>
+                                <td class="phonetable">Teljaoui</td>
                                 <td>+212 652583234</td>
                                 <td>
                                     <form action="" method="post">

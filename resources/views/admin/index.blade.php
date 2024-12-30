@@ -58,38 +58,8 @@
                                 <td>18</td>
                                 <td class="phonetable">18-12-2024</td>
                                 <td>18:00 am</td>
-                                <td>Karima</td>
-                                <td class="phonetable">Salihi</td>
-                                <td>+212 652583234</td>
-                                <td>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="">
-                                        <input type="submit" value="Details"
-                                            class="btn btn-info border-0 fw-bold text-white">
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>18</td>
-                                <td class="phonetable">18-12-2024</td>
-                                <td>18:00 am</td>
-                                <td>Karima</td>
-                                <td class="phonetable">Salihi</td>
-                                <td>+212 652583234</td>
-                                <td>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="">
-                                        <input type="submit" value="Details"
-                                            class="btn btn-info border-0 fw-bold text-white">
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>18</td>
-                                <td class="phonetable">18-12-2024</td>
-                                <td>18:00 am</td>
-                                <td>Karima</td>
-                                <td class="phonetable">Salihi</td>
+                                <td>Teljaoui</td>
+                                <td class="phonetable">Mohamed</td>
                                 <td>+212 652583234</td>
                                 <td>
                                     <form action="" method="post">
