@@ -35,15 +35,15 @@
                                     <h1>Welcome <span>back!</span></h1>
                                 </div>
                                 <div class="login-form">
-                                    <form action="/login_post" method="POST">
+                                    <form action="/admin/loginPost" method="POST">
                                         @csrf
                                         <div class="form-details">
                                             <label class="user">
-                                                <input type="text" name="email" placeholder="Login" id="username">
+                                                <input type="text" name="email" placeholder="Login" id="username" required>
                                             </label>
                                             <label class="pass">
                                                 <input type="password" name="password" placeholder="Password"
-                                                    id="password">
+                                                    id="password" required>
                                             </label>
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>

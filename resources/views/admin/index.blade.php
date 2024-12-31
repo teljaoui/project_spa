@@ -17,6 +17,15 @@
 
     <section class="admin my-5 py-5">
         <div class="container my-5">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="d-flex justify-content-between mx-5">
                 <div class="searchdate">
                     <form action="" method="post">

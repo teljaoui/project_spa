@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SpaController;
+use App\Http\Middleware\Authmidlleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,40 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/admin/login', function () {
+    return view('admin.login');
+})->name('admin.login');
+Route::view('/', 'home')->name('home');
+Route::view('/appointment', 'appointment')->name('appointment');
+Route::view('/available', 'available')->name('available');
+Route::view('/confirmed', 'confirmed')->name('confirmed');
+Route::view('/done', 'done')->name('done');
+
+Route::middleware([Authmidlleware::class])->group(function () {
+
+    Route::prefix('/admin')->group(function () {
+        Route::view('/index', 'admin.index')->name('admin.index');
+        Route::view('/updatepassword', 'admin.updatepassword')->name('admin.updatepassword');
+        Route::view('/add', 'admin.add')->name('admin.add');
+        Route::view('/past', 'admin.past')->name('admin.past');
+        Route::view('/details', 'admin.details')->name('admin.details');
+        Route::view('/management', 'admin.management')->name('admin.management');
+    });
 });
 
-Route::get('/appointment' , function(){
-    return view('appointment');
-});
-Route::get('/available' , function(){
-    return view('available');
-});
-Route::get('/confirmed' , function(){
-    return view('confirmed');
-});
-Route::get('/done' , function(){
-    return view('/done');
-});
-Route::get('/admin/login' , function(){
-    return view('admin/login');
-});
-Route::get('/admin/index' , function(){
-    return view('admin/index');
-});
-Route::get('/admin/updatepassword' , function(){
-    return view('admin/updatepassword');
-});
-Route::get('/admin/add', function(){
-    return view('/admin/add');
-});
-Route::get('/admin/past', function(){
-    return view('/admin/past');
-});
-Route::get('/admin/details' , function(){
-    return view('/admin/details');
-});
-Route::get('/admin/management' , function(){
-    return view('/admin/management');
-});
+Route::post('/admin/loginPost', [SpaController::class, 'loginPost'])->name('admin.loginPost');
+Route::get('/admin/logout', [SpaController::class, 'logout'])->name('admin.logout');
