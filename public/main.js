@@ -7,8 +7,16 @@ function closenavhome() {
     show.style.top = "-1000%"
 }
 
-document.querySelector('.logout').addEventListener("click", function(event) {
+document.querySelector('.logout').addEventListener("click", function (event) {
     if (!confirm("Are you sure you want to logout?")) {
         event.preventDefault();
     }
+});
+
+document.querySelectorAll('.confirmedelete').forEach(function (e) {
+    e.addEventListener("click", function (event) {
+        if (!confirm("Are you sure you want to delete this item?")) {
+            event.preventDefault();
+        }
+    })
 });

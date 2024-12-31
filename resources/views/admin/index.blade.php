@@ -63,21 +63,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($reservations as $item)
                             <tr>
-                                <td>18</td>
-                                <td class="phonetable">18-12-2024</td>
-                                <td>18:00 am</td>
-                                <td>Teljaoui</td>
-                                <td class="phonetable">Mohamed</td>
-                                <td>+212 652583234</td>
+                                <td>{{ $item->id }}</td>
+                                <td class="phonetable">{{ $item->reservation }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
+                                <td>{{ $item->client->first_name }}</td>
+                                <td class="phonetable">{{ $item->client->last_name }}</td>
+                                <td>{{ $item->client->phone_number }}</td>
                                 <td>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="">
-                                        <input type="submit" value="Details"
-                                            class="btn btn-info border-0 fw-bold text-white">
-                                    </form>
+                                    <a href="/admin/reservation/{{ $item->id }}"
+                                        class="btn btn-info border-0 fw-bold text-white">Dtails</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

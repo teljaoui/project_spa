@@ -19,11 +19,12 @@
             <div class="today">
                 <h6 class="title">Appointment Booking</h6>
                 <div>
-                    <form action="">
+                    <form action="addPost" method="POST">
+                        @csrf
                         <div class="">
                             <div class="form-group">
                                 <label for="">Please select the date of your visit.</label>
-                                <input type="date" name="" class="form-control" id="" required>
+                                <input type="date" name="reservation" class="form-control" id="" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center my-3">

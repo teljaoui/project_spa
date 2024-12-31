@@ -27,15 +27,20 @@ Route::view('/done', 'done')->name('done');
 Route::middleware([Authmidlleware::class])->group(function () {
 
     Route::prefix('/admin')->group(function () {
-        Route::view('/index', 'admin.index')->name('admin.index');
+        Route::get('/index', [SpaController::class , 'index'])->name('admin.index');
         Route::view('/updatepassword', 'admin.updatepassword')->name('admin.updatepassword');
         Route::view('/add', 'admin.add')->name('admin.add');
-        Route::view('/past', 'admin.past')->name('admin.past');
-        Route::view('/details', 'admin.details')->name('admin.details');
-        Route::view('/management', 'admin.management')->name('admin.management');
+        Route::get('/past', [SpaController::class , 'past'])->name('admin.past');
+        Route::get('/management', [SpaController::class , 'management'])->name('admin.management');
+        Route::get('/reservation/{id}' , [SpaController::class , 'reservation'])->name('admin.reservation');
+        Route::get('/deletereservation/{id}' , [SpaController::class , 'deletereservation']);
+        Route::get('/delete' , [SpaController::class , 'deleteAll']);
     });
 });
 
 Route::post('/admin/loginPost', [SpaController::class, 'loginPost']);
 Route::get('/admin/logout', [SpaController::class, 'logout']);
 Route::post('/admin/updatePost', [SpaController::class, 'updatePost']);
+Route::post('/admin/timePost', [SpaController::class, 'timePost']);
+Route::post('/admin/timdelete', [SpaController::class, 'timdelete']);
+Route::post('/admin/addPost', [SpaController::class, 'addPost']);

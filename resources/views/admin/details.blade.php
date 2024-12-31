@@ -22,36 +22,33 @@
                     <ul>
                         <li>
                             <span>code:</span>
-                            <p>18</p>
+                            <p>{{$reservation->id}}</p>
                         </li>
                         <li>
                             <span>Date Of Visit:</span>
-                            <p>18-12-2024</p>
+                            <p>{{$reservation->reservation}}</p>
                         </li>
                         <li>
                             <span>Visiting Time:</span>
-                            <p>12:00 am</p>
+                            <p>{{ \Carbon\Carbon::parse($reservation->horaire->time)->format('h:i a') }}</p>
                         </li>
                         <li>
                             <span>First Name:</span>
-                            <p>Mohamed</p>
+                            <p>{{$reservation->client->first_name}}</p>
                         </li>
                         <li>
                             <span>Last Name:</span>
-                            <p>Teljaoui</p>
+                            <p>{{$reservation->client->last_name}}</p>
                         </li>
                         <li>
                             <span>Phone Number:</span>
-                            <p>0652583234</p>
+                            <p>{{$reservation->client->phone_number}}</p>
                         </li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="" class="call"><i class="bi bi-telephone-forward"></i>Call</a>
-                    <form action="" method="post">
-                        <input type="hidden" name="">
-                        <input type="submit" value="Delete" class="btn btn-danger fw-bold">
-                    </form>
+                    <a href="tel:{{$reservation->client->phone_number}}" class="call"><i class="bi bi-telephone-forward"></i>Call</a>
+                    <a href="/admin/deletereservation/{{$reservation->id}}" class="btn btn-danger fw-bold confirmedelete">Delete</a>
                 </div>
             </div>
         </div>

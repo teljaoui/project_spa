@@ -18,14 +18,24 @@
         <div class="container my-5">
             <div class="today">
                 <h6 class="title">management Appointment's</h6>
-                <form action="" method="POST">
+                <form action="/admin/timePost" method="POST">
+                    @csrf
                     <div class="">
                         <div class="form-group">
                             <label for="">Add Appointment.</label>
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @elseif(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <div class="row my-3">
                                 <div class="col-lg-6 col-md-12 col-sm-12 my-2">
                                     <label for="" class="form-label">Time</label>
-                                    <input type="time" class="form-control" name="tim" required>
+                                    <input type="time" class="form-control" name="time" required>
                                 </div>
                                 <div>
                                     <input type="submit" value="Submit" class="btn btn-success border-0">
@@ -34,7 +44,7 @@
                         </div>
                     </div>
                 </form>
-                <form action="" method="POST">
+                <form>
                     <div class="">
                         <div class="form-group">
                             <label for="">List Appointment.</label>
@@ -43,10 +53,15 @@
                 </form>
                 <div class="d-flex justify-content-between list-time">
                     <div>
-                        <div class="admin-time"><span>10:00 am</span>
-                            <form action=""><button type="submit"><i class="fa-solid fa-trash-can"></i></button>
-                            </form>
-                        </div>
+                        @foreach ($times as $time)
+                            <div class="admin-time">{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span>
+                                <form action="/admin/timdelete" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $time->id }}">
+                                    <button type="submit" class="confirmedelete"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

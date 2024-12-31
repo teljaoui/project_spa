@@ -2,7 +2,7 @@
     <nav class="header-admin">
         <ul class="ul">
             <li class="logo">
-                <a href="/"><img src="../img/logotop.png" alt=""srcset=""><span>Spa</span></a>
+                <a href="/"><img src="{{ asset('img/logotop.png') }}" alt=""srcset=""><span>Spa</span></a>
             </li>
             <li class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"

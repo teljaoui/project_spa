@@ -2,13 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Horaire;
+use App\Models\Reservation;
 use App\Models\User;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class SpaController extends Controller
 {
+    public function index()
+    {
+        $times = Horaire::all();
+        $clients = Client::all();
+        $reservations = Reservation::with(['horaire', 'client'])
+            ->whereDate('reservation', '=', Carbon::today()->toDateString())
+            ->orderBy("time_id")->get();
+        return view('admin/index', compact('clients', 'times', 'reservations'));
+    }
+    public function reservation($id)
+    {
+        $times = Horaire::all();
+        $clients = Client::all();
+        $reservation = Reservation::with(['horaire', 'client'])->findOrFail($id);
+
+        return view('admin/details', compact('reservation', 'times', 'clients'));
+    }
+    public function deletereservation($id)
+    {
+        try {
+            $reservation = Reservation::find($id);
+            if ($reservation) {
+                $reservation->delete();
+                session()->flash('success', 'reservation Delete success.');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error delete reservation: ' . $e->getMessage());
+        }
+        return redirect('admin/index');
+    }
+
+    public function past()
+    {
+        $times = Horaire::all();
+        $clients = Client::all();
+        $reservations = Reservation::with(['horaire', 'client'])
+            ->whereDate('reservation', '<', Carbon::today()->toDateString())
+            ->orderBy("time_id")->get();
+        return view('admin/past', compact('clients', 'times', 'reservations'));
+    }
+    public function deleteAll()
+    {
+
+        try {
+            $reservations = Reservation::with(['horaire', 'client'])
+                ->whereDate('reservation', '<', Carbon::today()->toDateString());
+            if ($reservations) {
+                $reservations->delete();
+                session()->flash('success', 'reservation Delete success.');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error delete reservation: ' . $e->getMessage());
+        }
+        return redirect('admin/index');
+    }
     function loginPost(Request $request)
     {
         $user = User::where('email', '=', 'admin')->first();
@@ -38,7 +97,6 @@ class SpaController extends Controller
         }
         return redirect('/admin/login');
     }
-
     public function updatePost(Request $request)
     {
         $user = User::where("email", "=", "admin")->first();
@@ -58,4 +116,43 @@ class SpaController extends Controller
         }
         return redirect('/admin/updatepassword');
     }
+    public function management()
+    {
+        $times = Horaire::orderBy('time', 'asc')->get();
+        return view('admin/management', compact('times'));
+    }
+    public function timePost(Request $request)
+    {
+        try {
+            $request->validate([
+                'time' => 'required|date_format:H:i'
+            ]);
+
+            Horaire::create([
+                'time' => $request->time
+            ]);
+            session()->flash('success', 'Time Add success.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error adding time: ' . $e->getMessage());
+        }
+        return redirect('/admin/management');
+    }
+    public function timdelete(Request $request)
+    {
+        try {
+            $tim = Horaire::find($request->id);
+            if ($tim) {
+                $tim->delete();
+                session()->flash('success', 'Time Delete success.');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error adding time: ' . $e->getMessage());
+        }
+        return redirect('admin/management');
+    }
+    public function addPost(Request $request)
+    {
+
+    }
+
 }
