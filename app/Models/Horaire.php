@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Horaire extends Model
 {
     use HasFactory;
+    protected $fillable = ['time'];
+    public function Reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

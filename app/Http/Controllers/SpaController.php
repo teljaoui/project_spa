@@ -32,9 +32,9 @@ class SpaController extends Controller
     }
     public function logout()
     {
-        $data = array();
         if (Session::has('loginId')) {
             Session::pull('loginId');
+            return redirect('/admin/login')->with('success', 'You have been logged out successfully.');
         }
         return redirect('/admin/login');
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('horaires', function (Blueprint $table) {
             $table->id();
+            $table->time('time');
             $table->timestamps();
         });
     }
