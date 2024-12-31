@@ -36,5 +36,6 @@ Route::middleware([Authmidlleware::class])->group(function () {
     });
 });
 
-Route::post('/admin/loginPost', [SpaController::class, 'loginPost'])->name('admin.loginPost');
-Route::get('/admin/logout', [SpaController::class, 'logout'])->name('admin.logout');
+Route::post('/admin/loginPost', [SpaController::class, 'loginPost']);
+Route::get('/admin/logout', [SpaController::class, 'logout']);
+Route::post('/admin/updatePost', [SpaController::class, 'updatePost']);

@@ -19,17 +19,27 @@
             <div class="today">
                 <h6 class="title">Update password</h6>
                 <div>
-                    <form action="">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form action="/admin/updatePost" method="POST">
+                    @csrf
                         <div class="">
                             <div class="form-group">
                                 <label for="">New Password:</label>
-                                <input type="text" name="" class="form-control" id="" required>
+                                <input type="text" name="password" class="form-control" id="" required>
                             </div>
                         </div>
                         <div class="item">
                             <div class="form-group">
                                 <label for="">Confirme Password:</label>
-                                <input type="text" name="" class="form-control" id="" required>
+                                <input type="text" name="password_confirme" class="form-control" id="" required>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center my-3">

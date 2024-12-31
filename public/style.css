@@ -857,6 +857,10 @@ footer .media i {
     align-items: center;
 }
 
+.alert{
+    font-size: 15px;
+}
+
 /*admin ends*/
 @media (max-width:1280px) {
     .home-top {
