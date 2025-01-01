@@ -152,6 +152,34 @@ class SpaController extends Controller
     }
     public function addPost(Request $request)
     {
+        $date_reserve = $request->date_reserve;
+    
+        // Vérifie si la date est dans le passé
+        if ($date_reserve < Carbon::today()->toDateString()) {
+            return redirect('/admin/add')->with('error', 'Date entered is in the past. Please select a valid date.');
+        }
+    
+        $request->session()->put('date', $date_reserve);
+    
+        $all_times = Horaire::orderBy("time")->get();
+    
+        $reserved_times = Reservation::where('reservation', $date_reserve)->pluck('time_id');
+    
+        $available_times = $all_times->filter(function ($time) use ($reserved_times) {
+            return !$reserved_times->contains($time->id);
+        });
+    
+        return view('admin.add', ['times' => $available_times]);
+    }
+    
+    public function backtime(){
+        if(Session::has('date')){
+            Session::pull('date');
+        }
+        return redirect('/admin/add');
+    }
+
+    public function addtime(){
 
     }
 

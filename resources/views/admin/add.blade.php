@@ -16,50 +16,54 @@
     @include('admin.header')
     <section class="admin my-5 py-5">
         <div class="container my-5">
-            <div class="today">
-                <h6 class="title">Appointment Booking</h6>
-                <div>
-                    <form action="addPost" method="POST">
-                        @csrf
-                        <div class="">
-                            <div class="form-group">
-                                <label for="">Please select the date of your visit.</label>
-                                <input type="date" name="reservation" class="form-control" id="" required>
+            @if (!session('date'))
+                <div class="today">
+                    <h6 class="title">Appointment Booking</h6>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <div>
+                        <form action="addPost" method="POST">
+                            @csrf
+                            <div class="">
+                                <div class="form-group">
+                                    <label for="">Please select the date of your visit.</label>
+                                    <input type="date" name="date_reserve" class="form-control" id=""
+                                        required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-center my-3">
-                            <input type="submit" value="Next" class="w-50 submit">
-                        </div>
-                    </form>
+                            <div class="d-flex justify-content-center my-3">
+                                <input type="submit" value="Next" class="w-50 submit">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endif
             @if (session('date'))
                 <div class="today admin-time my-1">
                     <h6 class="title">Appointment Booking</h6>
                     <div>
                         <div class="form-group">
-                            <label for="">Here are the available time slots. Click on a slot to proceed with
+                            <label for="">Here are the available time slots in "{{ session('date') }}". Click on a
+                                slot to proceed with
                                 booking.</label>
                             <div class="time my-4 text-center">
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-                                <form action="" method="post">
-                                    <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                                </form>
-
+                                @foreach ($times as $time)
+                                    <form action="addtime" method="post">
+                                        <input type="hidden" name="time" value="{{ $time->id }}">
+                                        <button><i
+                                                class="fa-regular fa-circle"></i><span>{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span></button>
+                                    </form>
+                                @endforeach
+                            </div>
+                            <div>
+                                <a href="backtime" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
                             </div>
                         </div>
                     </div>
