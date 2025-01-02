@@ -117,8 +117,22 @@ class SpaController extends Controller
     }
     public function logout()
     {
-        if (Session::has('loginId')) {
+        if (
+            Session::has('loginId')
+            || Session::has('date')
+            || Session::has('time')
+            || Session::has('firstname')
+            || Session::has('lastname')
+            || Session::has('phone_number')
+            || Session::has('user')
+        ) {
             Session::pull('loginId');
+            Session::pull('date');
+            Session::pull('time');
+            Session::pull('firstname');
+            Session::pull('lastname');
+            Session::pull('phone_number');
+            Session::pull('user');
             return redirect('/admin/login')->with('success', 'You have been logged out successfully.');
         }
         return redirect('/admin/login');
@@ -287,6 +301,130 @@ class SpaController extends Controller
         $request->session()->forget(['firstname', 'lastname', 'phone_number', 'date', 'time', 'time_id', 'user']);
 
         return redirect('/admin/add')->with('success', 'Reservation confirmed successfully!');
+    }
+
+
+    //*Reservation user
+
+    public function appointmentpost(Request $request)
+    {
+        $date_reserve = $request->date_reserve;
+
+        if ($date_reserve < Carbon::today()->toDateString()) {
+            return redirect('appointment')->with('error', 'Date entered is in the past. Please select a valid date.');
+        }
+
+        $request->session()->put('date_front', $date_reserve);
+
+        $all_times = Horaire::orderBy("time")->get();
+
+        $reserved_times = Reservation::where('reservation', $date_reserve)->pluck('time_id');
+
+        $available_times = $all_times->filter(function ($time) use ($reserved_times) {
+            return !$reserved_times->contains($time->id);
+        });
+
+        return view('available', ['times' => $available_times]);
+    }
+    public function backappontment()
+    {
+        if (Session::has('date')) {
+            Session::pull('date');
+        }
+        return redirect('/appointment');
+    }
+
+    public function availablepost(Request $request)
+    {
+        $request->validate([
+            'time' => 'required|exists:horaires,id',
+        ]);
+
+        $time = Horaire::where('id', $request->time)->value('time');
+        $time_id = Horaire::where('id', $request->time)->value('id');
+        $request->session()->put('time_front', $time);
+        $request->session()->put('time_front_id', $time_id);
+
+        return view('confirmed');
+    }
+    public function backconfirmed(Request $request)
+    {
+        if ($request->session()->has('time_front')) {
+            $request->session()->forget('time_front');
+        }
+
+        $all_times = Horaire::orderBy('time')->get();
+
+        $reserved_times = Reservation::where('reservation', $request->session()->get('date_front'))->pluck('time_id');
+
+        $available_times = $all_times->filter(function ($time) use ($reserved_times) {
+            return !$reserved_times->contains($time->id);
+        });
+
+        return view('available', ['times' => $available_times]);
+    }
+
+    public function confirmedpost(Request $request)
+    {
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
+        $phone_number = $request->phone_number;
+
+        $request->session()->put('firstname_front', $firstname);
+        $request->session()->put('lastname_front', $lastname);
+        $request->session()->put('phone_front', $phone_number);
+        $request->session()->put('user_front', true);
+        return view("done");
+    }
+
+    public function backdone(Request $request)
+    {
+        if ($request->session()->has('user_front')) {
+            $request->session()->pull('user_front');
+            $request->session()->pull('firstname_front');
+            $request->session()->pull('lastname_front');
+            $request->session()->pull('phone_front');
+        }
+        return view('confirmed');
+    }
+
+    public function donepost(Request $request)
+    {
+        $firstname = $request->session()->get('firstname_front');
+        $lastname = $request->session()->get('lastname_front');
+        $phone_number = $request->session()->get('phone_front');
+        $date = $request->session()->get('date_front');
+        $time = $request->session()->get('time_front');
+        $user = $request->session()->get('user_front');
+        $time_id = $request->session()->get('time_front_id');
+
+        if (!$firstname || !$lastname || !$phone_number || !$date || !$time_id) {
+            return redirect('/appointment')->with('error', 'Missing session data. Please try again.');
+        }
+
+        $client = Client::create([
+            'first_name' => $firstname,
+            'last_name' => $lastname,
+            'phone_number' => $phone_number,
+        ]);
+
+        Reservation::create([
+            'reservation' => $date,
+            'time_id' => $time_id,
+            'user_id' => $client->id,
+        ]);
+
+        $request->session()->forget([
+            'firstname_front',
+            'lastname_front',
+            'phone_front',
+            'date_front',
+            'time_front',
+            'time_front_id',
+            'user_front'
+        ]);
+
+        return redirect('/appointment')->with('success', 'Reservation confirmed successfully!');
     }
 
 }

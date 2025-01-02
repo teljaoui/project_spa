@@ -661,8 +661,9 @@ footer .media i {
 
 .appointment .available .confirmed .next,
 .appointment .available .confirmed .back,
+.appointment .back,
 .today .next,
-.today .back {
+.today .back{
     font-size: 17px;
     padding: 5px 30px;
     background-color: var(--color-CB80AB);
@@ -682,6 +683,7 @@ footer .media i {
 }
 
 .appointment .available .confirmed .back,
+.appointment .back,
 .today .back {
     background-color: var(--color-9A9A9A);
     text-decoration: none;

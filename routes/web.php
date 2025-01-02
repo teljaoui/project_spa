@@ -20,9 +20,21 @@ Route::get('/admin/login', function () {
 })->name('admin.login');
 Route::view('/', 'home')->name('home');
 Route::view('/appointment', 'appointment')->name('appointment');
-Route::view('/available', 'available')->name('available');
-Route::view('/confirmed', 'confirmed')->name('confirmed');
-Route::view('/done', 'done')->name('done');
+//Route::view('/available', 'available')->name('available');
+//Route::view('/confirmed', 'confirmed')->name('confirmed');
+//Route::view('/done', 'done')->name('done');
+
+
+/*Reservation user*/
+
+Route::post('/appointmentpost' , [SpaController::class , 'appointmentpost']);
+Route::get('/backappontment' , [SpaController::class , 'backappontment']);
+Route::post('/availablepost' , [SpaController::class , 'availablepost']);
+Route::get('/backconfirmed' , [SpaController::class , 'backconfirmed']);
+Route::post('/confirmedpost' , [SpaController::class , 'confirmedpost']);
+Route::get('/backdone' , [SpaController::class , 'backdone']);
+Route::post('/donepost' , [SpaController::class , 'donepost']);
+/*Reservation user ends*/
 
 Route::middleware([Authmidlleware::class])->group(function () {
 
@@ -37,9 +49,9 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::get('/delete', [SpaController::class, 'deleteAll']);
         Route::get('/backtime', [SpaController::class, 'backtime']);
         Route::get('/backuser', [SpaController::class, 'backuser']);
-        Route::get('/backfinal' , [SpaController::class , 'backfinal']);
-        Route::post('/searchid' , [SpaController::class , 'searchid']);
-        Route::post('/searchdate' , [SpaController::class , 'searchdate']);
+        Route::get('/backfinal', [SpaController::class, 'backfinal']);
+        Route::post('/searchid', [SpaController::class, 'searchid']);
+        Route::post('/searchdate', [SpaController::class, 'searchdate']);
     });
 });
 

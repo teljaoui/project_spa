@@ -50,36 +50,19 @@
                     <p>Here are the available time slots. Click on a slot to proceed with booking.</p>
                 </div>
                 <div class="time my-2 text-center">
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
-                    <form action="" method="post">
-                        <button><i class="fa-regular fa-circle"></i><span>10:00 am</span></button>
-                    </form>
+                    @foreach ($times as $time)
+                        <form action="availablepost" method="post">
+                            @csrf
+                            <input type="hidden" name="time" value="{{ $time->id }}">
+                            <button type="submit">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span>
+                            </button>
+                        </form>
+                    @endforeach
+                </div>
+                <div>
+                    <a href="backappontment" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>

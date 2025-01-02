@@ -46,10 +46,20 @@
                 </div>
             </div>
             <div class="content">
-                <form action="" method="post">
+                <form action="appointmentpost" method="post">
+                    @csrf
                     <div class="form-group text-center">
                         <p>Please select the date of your visit.</p>
-                        <input type="date" id="date-select" name="date-select" class="form-control">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <input type="date" id="date-select" name="date_reserve" class="form-control">
                     </div>
                     <div class="form-group">
                         <input type="submit" class="submit" value="Next">

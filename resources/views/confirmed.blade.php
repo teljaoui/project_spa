@@ -47,9 +47,12 @@
             </div>
             <div class="available my-2">
                 <div class="confirmed">
-                    <p class="">Booking confirmed for 4:00 PM, Dec 27, 2024. <br> Kindly fill in your details
+                    <p class="">Booking confirmed for {{ session('date_front') }}",
+                        "{{ \Carbon\Carbon::parse(session('time_front'))->format('h:i a') }}". <br> Kindly fill in your
+                        details
                         below to proceed.</p>
-                    <form action="" method="post">
+                    <form action="confirmedpost" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 my-2">
                                 <label for="" class="form-label">First Name</label>
@@ -61,10 +64,10 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 my-2">
                                 <label for="" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" name="number" required>
+                                <input type="text" class="form-control" name="phone_number" required>
                             </div>
                             <div class="col-12 my-2 d-flex justify-content-between">
-                                <a href="" class="back">Back</a>
+                                <a href="backconfirmed" class="back">Back</a>
                                 <button type="submit" class="next">Next</button>
                             </div>
                         </div>

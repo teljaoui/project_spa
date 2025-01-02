@@ -50,31 +50,32 @@
                     <p>Check the information entered.</p>
                     <div class="donne">
                         <div class="mb-4">
-                            <a href="" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                            <a href="backdone" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
                         </div>
                         <ul>
                             <li>
                                 <span>Date Of Visit:</span>
-                                <p>12/12/2025</p>
+                                <p>{{session('date_front')}}</p>
                             </li>
                             <li>
                                 <span>Visiting Time:</span>
-                                <p>12:00 am</p>
+                                <p>{{session('time_front')}}</p>
                             </li>
                             <li>
                                 <span>First Name:</span>
-                                <p>Mohamed</p>
+                                <p>{{session('firstname_front')}}</p>
                             </li>
                             <li>
                                 <span>Last Name:</span>
-                                <p>Teljaoui</p>
+                                <p>{{session('lastname_front')}}</p>
                             </li>
                             <li>
                                 <span>Phone Number:</span>
-                                <p>0652583234</p>
+                                <p>{{session('phone_front')}}</p>
                             </li>
                         </ul>
-                        <form action="" class="text-center pb-4">
+                        <form action="donepost" class="text-center pb-4" method="POST">
+                            @csrf
                             <span>If the information is correct click on the button below</span><br><br>
                             <button type="submit" class="next">Confirmed</button>
                         </form>
