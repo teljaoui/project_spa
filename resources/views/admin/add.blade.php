@@ -45,17 +45,19 @@
                     </div>
                 </div>
             @endif
-            @if (session('date'))
+            @if (session('date') && !session('time'))
                 <div class="today admin-time my-1">
                     <h6 class="title">Appointment Booking</h6>
                     <div>
                         <div class="form-group">
-                            <label for="">Here are the available time slots in "{{ session('date') }}". Click on a
+                            <label for="">Here are the available time slots in "{{ session('date') }}". Click on
+                                a
                                 slot to proceed with
                                 booking.</label>
                             <div class="time my-4 text-center">
                                 @foreach ($times as $time)
-                                    <form action="addtime" method="post">
+                                    <form action="/admin/addtime" method="post">
+                                        @csrf
                                         <input type="hidden" name="time" value="{{ $time->id }}">
                                         <button><i
                                                 class="fa-regular fa-circle"></i><span>{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span></button>
@@ -69,14 +71,19 @@
                     </div>
                 </div>
             @endif
-            @if (session('time'))
+            @if (session('time') && !session('user'))
                 <div class="today">
                     <h6 class="title">Appointment Booking</h6>
                     <div>
-                        <form action="">
+                        <a href="backuser" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    </div>
+                    <div>
+                        <form action="adduser" method="POST">
+                            @csrf
                             <div class="">
                                 <div class="form-group">
-                                    <label for="">Booking confirmed for 4:00 PM, Dec 27, 2024.
+                                    <label for="">Booking confirmed for "{{ session('date') }}",
+                                        "{{ \Carbon\Carbon::parse(session('time'))->format('h:i a') }}".
                                         Kindly fill in your details below to proceed.</label>
                                     <div class="row my-3">
                                         <div class="col-lg-6 col-md-12 col-sm-12 my-2">
@@ -89,7 +96,7 @@
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 my-2">
                                             <label for="" class="form-label">Phone Number</label>
-                                            <input type="text" class="form-control" name="number" required>
+                                            <input type="text" class="form-control" name="phone_number" required>
                                         </div>
                                     </div>
                                 </div>
@@ -101,35 +108,36 @@
                     </div>
                 </div>
             @endif
-            @if (session('date') && session('time'))
+            @if (session('user'))
                 <div class="today my-1">
                     <h6 class="title">Appointment Booking</h6>
                     <div>
-                        <form action="">
+                        <form action="confirmed_admin" method="POST">
+                            @csrf
                             <p>Check the information entered.</p>
                             <div class="mb-4">
-                                <a href="" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                                <a href="backfinal" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
                             </div>
                             <ul>
                                 <li>
                                     <span>Date Of Visit:</span>
-                                    <p>12/12/2025</p>
+                                    <p>{{session('date')}}</p>
                                 </li>
                                 <li>
                                     <span>Visiting Time:</span>
-                                    <p>12:00 am</p>
+                                    <p>{{ \Carbon\Carbon::parse(session('time'))->format('h:i a') }}</p>
                                 </li>
                                 <li>
                                     <span>First Name:</span>
-                                    <p>Mohamed</p>
+                                    <p>{{session('firstname')}}</p>
                                 </li>
                                 <li>
                                     <span>Last Name:</span>
-                                    <p>Teljaoui</p>
+                                    <p>{{session('lastname')}}</p>
                                 </li>
                                 <li>
                                     <span>Phone Number:</span>
-                                    <p>0652583234</p>
+                                    <p>{{session('phone_number')}}</p>
                                 </li>
                             </ul>
                             <span class="admin-span">If the information is correct click on the button

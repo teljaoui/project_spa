@@ -153,34 +153,114 @@ class SpaController extends Controller
     public function addPost(Request $request)
     {
         $date_reserve = $request->date_reserve;
-    
-        // Vérifie si la date est dans le passé
+
         if ($date_reserve < Carbon::today()->toDateString()) {
             return redirect('/admin/add')->with('error', 'Date entered is in the past. Please select a valid date.');
         }
-    
+
         $request->session()->put('date', $date_reserve);
-    
+
         $all_times = Horaire::orderBy("time")->get();
-    
+
         $reserved_times = Reservation::where('reservation', $date_reserve)->pluck('time_id');
-    
+
         $available_times = $all_times->filter(function ($time) use ($reserved_times) {
             return !$reserved_times->contains($time->id);
         });
-    
+
         return view('admin.add', ['times' => $available_times]);
     }
-    
-    public function backtime(){
-        if(Session::has('date')){
+
+    public function backtime()
+    {
+        if (Session::has('date')) {
             Session::pull('date');
         }
         return redirect('/admin/add');
     }
+    public function addtime(Request $request)
+    {
+        $request->validate([
+            'time' => 'required|exists:horaires,id',
+        ]);
 
-    public function addtime(){
+        $time = Horaire::where('id', $request->time)->value('time');
+        $time_id =  Horaire::where('id', $request->time)->value('id');
+        $request->session()->put('time', $time);
+        $request->session()->put('time_id' , $time_id);
 
+        return redirect('/admin/add')->with('success', 'Time selected successfully!');
     }
 
+    public function backuser(Request $request)
+    {
+        if ($request->session()->has('time')) {
+            $request->session()->forget('time');
+        }
+
+        $all_times = Horaire::orderBy('time')->get();
+
+        $reserved_times = Reservation::where('reservation', $request->session()->get('date'))->pluck('time_id');
+
+        $available_times = $all_times->filter(function ($time) use ($reserved_times) {
+            return !$reserved_times->contains($time->id);
+        });
+
+        return view('admin.add', ['times' => $available_times]);
+    }
+
+    public function adduser(Request $request)
+    {
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
+        $phone_number = $request->phone_number;
+
+        $request->session()->put('firstname', $firstname);
+        $request->session()->put('lastname', $lastname);
+        $request->session()->put('phone_number', $phone_number);
+        $request->session()->put('user', true);
+        return view("admin.add");
+    }
+    public function backfinal(Request $request)
+    {
+        if ($request->session()->has('user')) {
+            $request->session()->pull('user');
+            $request->session()->pull('firstname');
+            $request->session()->pull('lastname');
+            $request->session()->pull('phone_number');
+        }
+        return view('admin.add');
+    }
+
+    public function confirmed_admin(Request $request)
+    {
+        $firstname = $request->session()->get('firstname');
+        $lastname = $request->session()->get('lastname');
+        $phone_number = $request->session()->get('phone_number');
+        $date = $request->session()->get('date');
+        $time =$request->session()->get('time');
+        $user = $request->session()->get('user');
+        $time_id = $request->session()->get('time_id');
+    
+        if (!$firstname || !$lastname || !$phone_number || !$date || !$time_id) {
+            return redirect('/admin/add')->with('error', 'Missing session data. Please try again.');
+        }
+    
+        $client = Client::create([
+            'first_name' => $firstname,
+            'last_name' => $lastname,
+            'phone_number' => $phone_number,
+        ]);
+    
+        Reservation::create([
+            'reservation' => $date,
+            'time_id' => $time_id,
+            'user_id' => $client->id, 
+        ]);
+    
+        $request->session()->forget(['firstname', 'lastname', 'phone_number', 'date', 'time','time_id' , 'user']);
+    
+        return redirect('/admin/add')->with('success', 'Reservation confirmed successfully!');
+    }
+    
 }
