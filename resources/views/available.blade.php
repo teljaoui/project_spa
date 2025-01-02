@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Spa</title>
+    <title>Réservation de Rendez-vous</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 
     <section class="appointment">
         <div class="title">
-            <h5>Appointment Booking</h5>
+            <h5>Réservation de Rendez-vous</h5>
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,26 +28,26 @@
             <div class="header-appointment">
                 <div class="row">
                     <div class="col-3">
-                        <span class="active">1. <strong>Time</strong></span>
+                        <span class="active">1. <strong>Temps</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span class="active">2. <strong>Possible time</strong></span>
+                        <span class="active">2. <strong>Horaires disponibles</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>3. <strong>confirmed</strong></span>
+                        <span>3. <strong>Confirmation</strong></span>
                         <hr>
                     </div>
                     <div class="col-3">
-                        <span>4. <strong>Done</strong></span>
+                        <span>4. <strong>Terminé</strong></span>
                         <hr>
                     </div>
                 </div>
             </div>
             <div class="available my-2">
                 <div class="form-group">
-                    <p>Here are the available time slots. Click on a slot to proceed with booking.</p>
+                    <p>Voici les créneaux horaires disponibles le {{ session('date_front') }}. Cliquez sur un créneau pour procéder à la réservation.</p>
                 </div>
                 <div class="time my-2 text-center">
                     @foreach ($times as $time)
@@ -62,7 +62,7 @@
                     @endforeach
                 </div>
                 <div>
-                    <a href="backappontment" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="backappontment" class="back"><i class="fa-solid fa-arrow-left"></i> Retour</a>
                 </div>
             </div>
         </div>

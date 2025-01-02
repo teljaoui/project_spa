@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Spa</title>
+    <title>Réservation de Rendez-vous</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 
     <section class="appointment">
         <div class="title">
-            <h5>Appointment Booking</h5>
+            <h5>Réservation de Rendez-vous</h5>
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,47 +28,45 @@
             <div class="header-appointment">
                 <div class="row">
                     <div class="col-3">
-                        <span class="active">1. <strong>Time</strong></span>
+                        <span class="active">1. <strong>Temps</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span class="active">2. <strong>Possible time</strong></span>
+                        <span class="active">2. <strong>Horaires disponibles</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span class="active">3. <strong>confirmed</strong></span>
+                        <span class="active">3. <strong>Confirmation</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>4. <strong>Done</strong></span>
+                        <span>4. <strong>Terminé</strong></span>
                         <hr>
                     </div>
                 </div>
             </div>
             <div class="available my-2">
                 <div class="confirmed">
-                    <p class="">Booking confirmed for {{ session('date_front') }}",
-                        "{{ \Carbon\Carbon::parse(session('time_front'))->format('h:i a') }}". <br> Kindly fill in your
-                        details
-                        below to proceed.</p>
+                    <p class="">Réservation confirmée pour le {{ session('date_front') }}",
+                        "{{ \Carbon\Carbon::parse(session('time_front'))->format('h:i a') }}". <br>  Veuillez remplir vos informations ci-dessous pour continuer.</p>
                     <form action="confirmedpost" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                <label for="" class="form-label">First Name</label>
+                                <label for="" class="form-label">Prénom</label>
                                 <input type="text" class="form-control" name="firstname" required>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                <label for="" class="form-label">Last Name</label>
+                                <label for="" class="form-label">Nom</label>
                                 <input type="text" class="form-control" name="lastname" required>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 my-2">
-                                <label for="" class="form-label">Phone Number</label>
+                                <label for="" class="form-label">Numéro de Téléphone</label>
                                 <input type="text" class="form-control" name="phone_number" required>
                             </div>
                             <div class="col-12 my-2 d-flex justify-content-between">
-                                <a href="backconfirmed" class="back">Back</a>
-                                <button type="submit" class="next">Next</button>
+                                <a href="backconfirmed" class="back">Retour</a>
+                                <button type="submit" class="next">Suivant</button>
                             </div>
                         </div>
                     </form>

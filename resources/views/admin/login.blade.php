@@ -32,24 +32,26 @@
                         <div id="login" class="tab-pane fade in active">
                             <div class="login-inner">
                                 <div class="title">
-                                    <h1>Welcome <span>back!</span></h1>
+                                    <h1>Bienvenue<span>de nouveau !</span>
+                                    </h1>
                                 </div>
                                 <div class="login-form">
                                     <form action="/admin/loginPost" method="POST">
                                         @csrf
                                         <div class="form-details">
                                             <label class="user">
-                                                <input type="text" name="email" placeholder="Login" id="username" required>
+                                                <input type="text" name="email" placeholder="Adresse e-mail" id="username"
+                                                    required>
                                             </label>
                                             <label class="pass">
-                                                <input type="password" name="password" placeholder="Password"
+                                                <input type="password" name="password" placeholder="Mot de passe"
                                                     id="password" required>
                                             </label>
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="form-btn">Login</button>
+                                        <button type="submit" class="form-btn">Se connecter</button>
                                     </form>
                                 </div>
                             </div>

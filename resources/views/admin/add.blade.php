@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Admin</title>
+    <title>Réservation de Rendez-vous</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <div class="container my-5">
             @if (!session('date'))
                 <div class="today">
-                    <h6 class="title">Appointment Booking</h6>
+                    <h6 class="title">Réservation de Rendez-vous</h6>
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -33,13 +33,13 @@
                             @csrf
                             <div class="">
                                 <div class="form-group">
-                                    <label for="">Please select the date of your visit.</label>
+                                    <label for="">Veuillez sélectionner la date de votre visite.</label>
                                     <input type="date" name="date_reserve" class="form-control" id=""
                                         required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center my-3">
-                                <input type="submit" value="Next" class="w-50 submit">
+                                <input type="submit" value="Suivant" class="w-50 submit">
                             </div>
                         </form>
                     </div>
@@ -47,13 +47,11 @@
             @endif
             @if (session('date') && !session('time'))
                 <div class="today admin-time my-1">
-                    <h6 class="title">Appointment Booking</h6>
+                    <h6 class="title">Réservation de Rendez-vous</h6>
                     <div>
                         <div class="form-group">
-                            <label for="">Here are the available time slots in "{{ session('date') }}". Click on
-                                a
-                                slot to proceed with
-                                booking.</label>
+                            <label for="">Voici les créneaux horaires disponibles le {{ session('date') }}.
+                                Cliquez sur un créneau pour procéder à la réservation.</label>
                             <div class="time my-4 text-center">
                                 @foreach ($times as $time)
                                     <form action="/admin/addtime" method="post">
@@ -65,7 +63,7 @@
                                 @endforeach
                             </div>
                             <div>
-                                <a href="backtime" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                                <a href="backtime" class="back"><i class="fa-solid fa-arrow-left"></i> Retour</a>
                             </div>
                         </div>
                     </div>
@@ -73,36 +71,36 @@
             @endif
             @if (session('time') && !session('user'))
                 <div class="today">
-                    <h6 class="title">Appointment Booking</h6>
+                    <h6 class="title">Réservation de Rendez-vous</h6>
                     <div>
-                        <a href="backuser" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                        <a href="backuser" class="back"><i class="fa-solid fa-arrow-left"></i> Retour</a>
                     </div>
                     <div>
                         <form action="adduser" method="POST">
                             @csrf
                             <div class="">
                                 <div class="form-group">
-                                    <label for="">Booking confirmed for "{{ session('date') }}",
-                                        "{{ \Carbon\Carbon::parse(session('time'))->format('h:i a') }}".
-                                        Kindly fill in your details below to proceed.</label>
+                                    <label for="">Réservation confirmée pour le {{ session('date') }},
+                                        {{ \Carbon\Carbon::parse(session('time'))->format('h:i a') }}. Veuillez remplir
+                                        vos coordonnées ci-dessous pour continuer.</label>
                                     <div class="row my-3">
                                         <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                            <label for="" class="form-label">First Name</label>
+                                            <label for="" class="form-label">Prénom: </label>
                                             <input type="text" class="form-control" name="firstname" required>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                            <label for="" class="form-label">Last Name</label>
+                                            <label for="" class="form-label">Nom: </label>
                                             <input type="text" class="form-control" name="lastname" required>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 my-2">
-                                            <label for="" class="form-label">Phone Number</label>
+                                            <label for="" class="form-label">Téléphone: </label>
                                             <input type="text" class="form-control" name="phone_number" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center my-3">
-                                <input type="submit" value="Next" class="w-50 submit">
+                                <input type="submit" value="Suivant" class="w-50 submit">
                             </div>
                         </form>
                     </div>
@@ -110,39 +108,38 @@
             @endif
             @if (session('user'))
                 <div class="today my-1">
-                    <h6 class="title">Appointment Booking</h6>
+                    <h6 class="title">Réservation de Rendez-vous</h6>
                     <div>
                         <form action="confirmed_admin" method="POST">
                             @csrf
-                            <p>Check the information entered.</p>
+                            <p>Vérifiez les informations saisies.</p>
                             <div class="mb-4">
-                                <a href="backfinal" class="back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                                <a href="backfinal" class="back"><i class="fa-solid fa-arrow-left"></i> Retour</a>
                             </div>
                             <ul>
                                 <li>
-                                    <span>Date Of Visit:</span>
-                                    <p>{{session('date')}}</p>
+                                    <span>Date de la visite:</span>
+                                    <p>{{ session('date') }}</p>
                                 </li>
                                 <li>
-                                    <span>Visiting Time:</span>
+                                    <span>Heure de la visite :</span>
                                     <p>{{ \Carbon\Carbon::parse(session('time'))->format('h:i a') }}</p>
                                 </li>
                                 <li>
-                                    <span>First Name:</span>
-                                    <p>{{session('firstname')}}</p>
+                                    <span>Prénom:</span>
+                                    <p>{{ session('firstname') }}</p>
                                 </li>
                                 <li>
-                                    <span>Last Name:</span>
-                                    <p>{{session('lastname')}}</p>
+                                    <span>Nom:</span>
+                                    <p>{{ session('lastname') }}</p>
                                 </li>
                                 <li>
-                                    <span>Phone Number:</span>
-                                    <p>{{session('phone_number')}}</p>
+                                    <span>Numéro de Téléphone:</span>
+                                    <p>{{ session('phone_number') }}</p>
                                 </li>
                             </ul>
-                            <span class="admin-span">If the information is correct click on the button
-                                below</span><br><br>
-                            <button type="submit" class="next">Confirmed</button>
+                            <span class="admin-span">Si les informations sont correctes, cliquez sur le bouton ci-dessous</span><br><br>
+                            <button type="submit" class="next">Confirmé</button>
                         </form>
                     </div>
                 </div>

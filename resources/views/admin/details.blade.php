@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Admin</title>
+    <title>Détails de la réservation de Client</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <section class="admin my-5 py-5">
         <div class="container my-5">
             <div class="today">
-                <h6 class="title">Appointment Details user</h6>
+                <h6 class="title">Détails de la réservation de Client </h6>
                 <div>
                     <ul>
                         <li>
@@ -25,30 +25,30 @@
                             <p>{{$reservation->id}}</p>
                         </li>
                         <li>
-                            <span>Date Of Visit:</span>
+                            <span>Date de la visite:</span>
                             <p>{{$reservation->reservation}}</p>
                         </li>
                         <li>
-                            <span>Visiting Time:</span>
+                            <span>Heure de la visite :</span>
                             <p>{{ \Carbon\Carbon::parse($reservation->horaire->time)->format('h:i a') }}</p>
                         </li>
                         <li>
-                            <span>First Name:</span>
+                            <span>Prénom:</span>
                             <p>{{$reservation->client->first_name}}</p>
                         </li>
                         <li>
-                            <span>Last Name:</span>
+                            <span>Nom:</span>
                             <p>{{$reservation->client->last_name}}</p>
                         </li>
                         <li>
-                            <span>Phone Number:</span>
+                            <span>Numéro de Téléphone:</span>
                             <p>{{$reservation->client->phone_number}}</p>
                         </li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="tel:{{$reservation->client->phone_number}}" class="call"><i class="bi bi-telephone-forward"></i>Call</a>
-                    <a href="/admin/deletereservation/{{$reservation->id}}" class="btn btn-danger fw-bold confirmedelete">Delete</a>
+                    <a href="tel:{{$reservation->client->phone_number}}" class="call"><i class="bi bi-telephone-forward"></i>Appel</a>
+                    <a href="/admin/deletereservation/{{$reservation->id}}" class="btn btn-danger fw-bold confirmedelete">Supprimer</a>
                 </div>
             </div>
         </div>

@@ -16,18 +16,17 @@
    @include('layout/header')
     <section class="home-top" id="home-top">
         <div class="content">
-            <h5>Beauty Services</h5>
-            <p>Give yourself this moment . <br>
-                make an appointment in just a click</p><br>
-            <a href="/appointment">make an appointment</a>
+            <h5>Services de beauté</h5>
+            <p>Offrez-vous ce moment. <br> Prenez rendez-vous en un clic.</p><br>
+            <a href="/appointment">Prenez un rendez-vous</a>
         </div>
     </section>
     <section class="home-service" id="services">
         <div class="container">
             <div class="title">
-                <h5>Our Services</h5>
+                <h5>Nos services</h5>
                 <hr class="hr">
-                <p>You will love looking great every day </p>
+                <p>Vous adorerez avoir fière allure chaque jour</p>
             </div>
             <div class="services-content">
                 <div class="services">
@@ -61,17 +60,17 @@
     </section>
     <section class="home-reserve">
         <div class="text-center align-items-center py-5">
-            <h5 class="pb-2">Special offers</h5>
-            <p class="pb-3">make an appointment in just a click</p>
-            <a href="">make an appointment</a>
+            <h5 class="pb-2">Offres spéciales</h5>
+            <p class="pb-3">"Prenez rendez-vous en un clic</p>
+            <a href="/appointment">Prenez un rendez-vous</a>
         </div>
     </section>
     <section class="home-contact" id="home-contact">
         <div class="container">
             <div class="title">
-                <h5>Contact Us</h5>
+                <h5>Contactez-nous</h5>
                 <hr class="hr">
-                <p>Feel free to get in touch with us now for more details</p>
+                <p>N'hésitez pas à nous contacter dès maintenant pour plus de détails</p>
             </div>
             <div class="contact-content py-5">
                 <div class="row">

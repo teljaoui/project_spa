@@ -21,9 +21,9 @@
                 </li>
             </ul>
             <ul>
-                <li><a href="/" class="navigation" onclick="closenavhome()">Home <i
+                <li><a href="/" class="navigation" onclick="closenavhome()">Accueil <i
                             class="fa-solid fa-arrow-right"></i></a></li>
-                <li><a href="/#services" class="navigation" onclick="closenavhome()">Service <i
+                <li><a href="/#services" class="navigation" onclick="closenavhome()">Services <i
                             class="fa-solid fa-arrow-right"></i></a></li>
                 <li><a href="/#home-contact" class="navigation" onclick="closenavhome()">Contact <i
                             class="fa-solid fa-arrow-right"></i></a></li>

@@ -235,7 +235,7 @@ li {
 
 .home-top .content h5 {
     font-size: 50px;
-    font-family: "Lobster", serif;
+    font-family: var(--font-lobster);
     text-transform: uppercase;
     color: var(--color-1F2544);
 }

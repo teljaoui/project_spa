@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Admin</title>
+    <title>Gestion des rendez-vous</title>
 </head>
 
 <body>
@@ -17,12 +17,12 @@
     <section class="admin my-5 py-5">
         <div class="container my-5">
             <div class="today">
-                <h6 class="title">management Appointment's</h6>
+                <h6 class="title">Gestion des rendez-vous</h6>
                 <form action="/admin/timePost" method="POST">
                     @csrf
                     <div class="">
                         <div class="form-group">
-                            <label for="">Add Appointment.</label>
+                            <label for="">Ajouter un rendez-vous.</label>
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -34,11 +34,11 @@
                             @endif
                             <div class="row my-3">
                                 <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                    <label for="" class="form-label">Time</label>
+                                    <label for="" class="form-label">Heure</label>
                                     <input type="time" class="form-control" name="time" required>
                                 </div>
                                 <div>
-                                    <input type="submit" value="Submit" class="btn btn-success border-0">
+                                    <input type="submit" value="Ajouter" class="btn btn-success border-0">
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                 <form>
                     <div class="">
                         <div class="form-group">
-                            <label for="">List Appointment.</label>
+                            <label for="">Lister les rendez-vous</label>
                         </div>
                     </div>
                 </form>

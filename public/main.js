@@ -8,14 +8,14 @@ function closenavhome() {
 }
 
 document.querySelector('.logout').addEventListener("click", function (event) {
-    if (!confirm("Are you sure you want to logout?")) {
+    if (!confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
         event.preventDefault();
     }
 });
 
 document.querySelectorAll('.confirmedelete').forEach(function (e) {
     e.addEventListener("click", function (event) {
-        if (!confirm("Are you sure you want to delete this item?")) {
+        if (!confirm("Êtes-vous sûr de vouloir supprimer cet élément ?")) {
             event.preventDefault();
         }
     })

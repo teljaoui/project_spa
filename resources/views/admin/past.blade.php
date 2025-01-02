@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Admin</title>
+    <title>Rendez-vous passé</title>
 </head>
 
 <body>
@@ -18,17 +18,17 @@
     <section class="admin my-5 py-5">
         <div class="container my-5">
             <div class="today">
-                <h6 class="title">Past Appointment</h6>
+                <h6 class="title">Rendez-vous passé</h6>
                 <div class="table-responsive dataview">
                     <table class="table datatable ">
                         <thead>
                             <tr>
                                 <th>code</th>
                                 <th class="phonetable">Date</th>
-                                <th>Time</th>
-                                <th>First Name</th>
-                                <th class="phonetable">Last Name</th>
-                                <th>Phone Number</th>
+                                <th>Heure</th>
+                                <th>Prénom</th>
+                                <th class="phonetable">Nom</th>
+                                <th>Téléphone</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                     </table>
                 </div>
                 <div class="text-center">
-                    <a href="/admin/delete" class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete">Delete All</a>
+                    <a href="/admin/delete" class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete">Supprimer tout</a>
                 </div>
             </div>
         </div>

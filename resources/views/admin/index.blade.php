@@ -32,7 +32,7 @@
                         @csrf
                         <div class="form-group">
                             <input type="date" name="date_reserv" class="form-control" id="" required>
-                            <input type="submit" class="btn btn-success border-0" value="Search">
+                            <input type="submit" class="btn btn-success border-0" value="Recherche">
                         </div>
                     </form>
                 </div>
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <input type="number" name="id" class="form-control" id=""
                                 placeholder="code client" required>
-                            <input type="submit" class="btn btn-success border-0" value="Search">
+                            <input type="submit" class="btn btn-success border-0" value="Recherche">
                         </div>
                     </form>
                 </div>
@@ -50,17 +50,17 @@
         </div>
         <div class="container">
             <div class="today">
-                <h6 class="title">Appointment Today</h6>
+                <h6 class="title">Rendez-vous du jour</h6>
                 <div class="table-responsive dataview">
                     <table class="table datatable ">
                         <thead>
                             <tr>
                                 <th>code</th>
                                 <th class="phonetable">Date</th>
-                                <th>Time</th>
-                                <th>First Name</th>
-                                <th class="phonetable">Last Name</th>
-                                <th>Phone Number</th>
+                                <th>Heure</th>
+                                <th>Prénom</th>
+                                <th class="phonetable">Nom</th>
+                                <th>Téléphone</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

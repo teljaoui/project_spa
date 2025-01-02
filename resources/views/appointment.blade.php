@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Spa</title>
+    <title>Réservation de Rendez-vous</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 
     <section class="appointment">
         <div class="title">
-            <h5>Appointment Booking</h5>
+            <h5>Réservation de Rendez-vous</h5>
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,19 +28,19 @@
             <div class="header-appointment">
                 <div class="row">
                     <div class="col-3">
-                        <span class="active">1. <strong>Time</strong></span>
+                        <span class="active">1. <strong>Temps</strong></span>
                         <hr class="active">
                     </div>
                     <div class="col-3">
-                        <span>2. <strong>Possible time</strong></span>
+                        <span>2. <strong>Horaires disponibles</strong></span>
                         <hr>
                     </div>
                     <div class="col-3">
-                        <span>3. <strong>confirmed</strong></span>
+                        <span>3. <strong>Confirmation</strong></span>
                         <hr>
                     </div>
                     <div class="col-3">
-                        <span>4. <strong>Done</strong></span>
+                        <span>4. <strong>Terminé</strong></span>
                         <hr>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 <form action="appointmentpost" method="post">
                     @csrf
                     <div class="form-group text-center">
-                        <p>Please select the date of your visit.</p>
+                        <p>Veuillez sélectionner la date de votre visite..</p>
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -62,7 +62,7 @@
                         <input type="date" id="date-select" name="date_reserve" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="submit" value="Next">
+                        <input type="submit" class="submit" value="Suivant">
                     </div>
                 </form>
             </div>

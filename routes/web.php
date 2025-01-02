@@ -50,8 +50,7 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::get('/backtime', [SpaController::class, 'backtime']);
         Route::get('/backuser', [SpaController::class, 'backuser']);
         Route::get('/backfinal', [SpaController::class, 'backfinal']);
-        Route::post('/searchid', [SpaController::class, 'searchid']);
-        Route::post('/searchdate', [SpaController::class, 'searchdate']);
+
     });
 });
 
@@ -64,4 +63,5 @@ Route::post('/admin/addPost', [SpaController::class, 'addPost']);
 Route::post('/admin/addtime', [SpaController::class, 'addtime']);
 Route::post('/admin/adduser', [SpaController::class, 'adduser']);
 Route::post('/admin/confirmed_admin', [SpaController::class, 'confirmed_admin']);
-
+Route::post('/admin/searchid', [SpaController::class, 'searchid']);
+Route::post('/admin/searchdate', [SpaController::class, 'searchdate']);

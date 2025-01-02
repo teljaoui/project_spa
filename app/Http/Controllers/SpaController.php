@@ -24,7 +24,7 @@ class SpaController extends Controller
     }
     public function searchid(Request $request)
     {
-        $id = $request->input('id');
+        $id = $request->id;
         $times = Horaire::all();
         $clients = Client::all();
 
@@ -33,7 +33,7 @@ class SpaController extends Controller
         if ($reservation) {
             return view('admin.index', compact('clients', 'times', 'reservation'));
         } else {
-            return redirect()->back()->with('error', 'Reservation not found');
+            return redirect('admin/index')->with('error', 'Réservation introuvable');
         }
     }
     public function searchdate(Request $request)
@@ -41,13 +41,16 @@ class SpaController extends Controller
         $date = $request->date_reserv;
         $times = Horaire::all();
         $clients = Client::all();
-        $reservation_date = Reservation::with(['horaire', 'client'])->where("reservation", "=", $date)->get();
-        if ($reservation_date) {
-            return view('admin.index', compact('clients', 'times', 'reservation_date'));
+
+        $reservation_date = Reservation::with(['horaire', 'client'])->whereDate('reservation', '=', $date)->get();
+
+        if ($reservation_date->isEmpty()) {
+            return redirect('admin/index')->with('error', 'Aucune réservation trouvée pour cette date');
         } else {
-            return redirect()->back()->with('error', 'Reservations not found');
+            return view('admin.index', compact('clients', 'times', 'reservation_date'));
         }
     }
+
     public function reservation($id)
     {
         $times = Horaire::all();
@@ -62,10 +65,10 @@ class SpaController extends Controller
             $reservation = Reservation::find($id);
             if ($reservation) {
                 $reservation->delete();
-                session()->flash('success', 'reservation Delete success.');
+                session()->flash('success', 'Réservation supprimée avec succès');
             }
         } catch (\Exception $e) {
-            session()->flash('error', 'Error delete reservation: ' . $e->getMessage());
+            session()->flash('error', 'Erreur de suppression de la réservation :' . $e->getMessage());
         }
         return redirect('admin/index');
     }
@@ -87,10 +90,10 @@ class SpaController extends Controller
                 ->whereDate('reservation', '<', Carbon::today()->toDateString());
             if ($reservations) {
                 $reservations->delete();
-                session()->flash('success', 'reservation Delete success.');
+                session()->flash('success', 'Réservation supprimée avec succès.');
             }
         } catch (\Exception $e) {
-            session()->flash('error', 'Error delete reservation: ' . $e->getMessage());
+            session()->flash('error', 'Erreur de suppression de la réservation : ' . $e->getMessage());
         }
         return redirect('admin/index');
     }
@@ -101,7 +104,7 @@ class SpaController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $request->session()->put('loginId', $user->id);
-                return redirect('/admin/index')->with("success", "Welcome Back Admin , login has success");
+                return redirect('/admin/index')->with("success", "Bienvenue de retour Admin, la connexion a réussi.");
             } else {
                 return back()->withErrors(
                     [
@@ -111,7 +114,7 @@ class SpaController extends Controller
             }
         } else {
             return back()->withErrors([
-                'email' => "Email Not found"
+                'email' => "Email introuvable"
             ])->withInput();
         }
     }
@@ -133,7 +136,7 @@ class SpaController extends Controller
             Session::pull('lastname');
             Session::pull('phone_number');
             Session::pull('user');
-            return redirect('/admin/login')->with('success', 'You have been logged out successfully.');
+            return redirect('/admin/login')->with('success', 'Vous avez été déconnecté avec succès.');
         }
         return redirect('/admin/login');
     }
@@ -150,9 +153,9 @@ class SpaController extends Controller
                     'password' => Hash::make($request->password)
                 ]
             );
-            session()->flash('success', 'Password Modifié avec succès.');
+            session()->flash('success', 'Mot de passe modifié avec succès.');
         } else {
-            session()->flash('error', 'Passwords do not match');
+            session()->flash('error', 'Les mots de passe ne correspondent pas.');
         }
         return redirect('/admin/updatepassword');
     }
@@ -171,9 +174,9 @@ class SpaController extends Controller
             Horaire::create([
                 'time' => $request->time
             ]);
-            session()->flash('success', 'Time Add success.');
+            session()->flash('success', 'Heure ajoutée avec succès.');
         } catch (\Exception $e) {
-            session()->flash('error', 'Error adding time: ' . $e->getMessage());
+            session()->flash('error', "Erreur lors de l'ajout de l'heure : " . $e->getMessage());
         }
         return redirect('/admin/management');
     }
@@ -183,10 +186,10 @@ class SpaController extends Controller
             $tim = Horaire::find($request->id);
             if ($tim) {
                 $tim->delete();
-                session()->flash('success', 'Time Delete success.');
+                session()->flash('success', 'Heure supprimée avec succès.');
             }
         } catch (\Exception $e) {
-            session()->flash('error', 'Error adding time: ' . $e->getMessage());
+            session()->flash('error', "Erreur lors de l'ajout de l'heure :" . $e->getMessage());
         }
         return redirect('admin/management');
     }
@@ -195,7 +198,7 @@ class SpaController extends Controller
         $date_reserve = $request->date_reserve;
 
         if ($date_reserve < Carbon::today()->toDateString()) {
-            return redirect('/admin/add')->with('error', 'Date entered is in the past. Please select a valid date.');
+            return redirect('/admin/add')->with('error', 'La date saisie est dans le passé. Veuillez sélectionner une date valide.');
         }
 
         $request->session()->put('date', $date_reserve);
@@ -229,7 +232,7 @@ class SpaController extends Controller
         $request->session()->put('time', $time);
         $request->session()->put('time_id', $time_id);
 
-        return redirect('/admin/add')->with('success', 'Time selected successfully!');
+        return redirect('/admin/add')->with('success', 'Heure sélectionnée avec succès !');
     }
 
     public function backuser(Request $request)
@@ -283,7 +286,7 @@ class SpaController extends Controller
         $time_id = $request->session()->get('time_id');
 
         if (!$firstname || !$lastname || !$phone_number || !$date || !$time_id) {
-            return redirect('/admin/add')->with('error', 'Missing session data. Please try again.');
+            return redirect('/admin/add')->with('error', 'Données de session manquantes. Veuillez réessayer.');
         }
 
         $client = Client::create([
@@ -300,7 +303,7 @@ class SpaController extends Controller
 
         $request->session()->forget(['firstname', 'lastname', 'phone_number', 'date', 'time', 'time_id', 'user']);
 
-        return redirect('/admin/add')->with('success', 'Reservation confirmed successfully!');
+        return redirect('/admin/add')->with('success', 'Réservation confirmée avec succès !');
     }
 
 
@@ -311,7 +314,7 @@ class SpaController extends Controller
         $date_reserve = $request->date_reserve;
 
         if ($date_reserve < Carbon::today()->toDateString()) {
-            return redirect('appointment')->with('error', 'Date entered is in the past. Please select a valid date.');
+            return redirect('appointment')->with('error', 'La date saisie est dans le passé. Veuillez sélectionner une date valide.');
         }
 
         $request->session()->put('date_front', $date_reserve);
@@ -399,7 +402,7 @@ class SpaController extends Controller
         $time_id = $request->session()->get('time_front_id');
 
         if (!$firstname || !$lastname || !$phone_number || !$date || !$time_id) {
-            return redirect('/appointment')->with('error', 'Missing session data. Please try again.');
+            return redirect('/appointment')->with('error', 'Données de session manquantes. Veuillez réessayer.');
         }
 
         $client = Client::create([
@@ -424,7 +427,7 @@ class SpaController extends Controller
             'user_front'
         ]);
 
-        return redirect('/appointment')->with('success', 'Reservation confirmed successfully!');
+        return redirect('/appointment')->with('success', 'Réservation confirmée avec succès !');
     }
 
 }
