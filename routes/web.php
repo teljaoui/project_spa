@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/admin/login', function () {
     return view('admin.login');
 })->name('admin.login');
-Route::view('/', 'home')->name('home');
 Route::view('/appointment', 'appointment')->name('appointment');
 //Route::view('/available', 'available')->name('available');
 //Route::view('/confirmed', 'confirmed')->name('confirmed');
@@ -27,13 +28,13 @@ Route::view('/appointment', 'appointment')->name('appointment');
 
 /*Reservation user*/
 
-Route::post('/appointmentpost' , [SpaController::class , 'appointmentpost']);
-Route::get('/backappontment' , [SpaController::class , 'backappontment']);
-Route::post('/availablepost' , [SpaController::class , 'availablepost']);
-Route::get('/backconfirmed' , [SpaController::class , 'backconfirmed']);
-Route::post('/confirmedpost' , [SpaController::class , 'confirmedpost']);
-Route::get('/backdone' , [SpaController::class , 'backdone']);
-Route::post('/donepost' , [SpaController::class , 'donepost']);
+Route::post('/appointmentpost', [SpaController::class, 'appointmentpost']);
+Route::get('/backappontment', [SpaController::class, 'backappontment']);
+Route::post('/availablepost', [SpaController::class, 'availablepost']);
+Route::get('/backconfirmed', [SpaController::class, 'backconfirmed']);
+Route::post('/confirmedpost', [SpaController::class, 'confirmedpost']);
+Route::get('/backdone', [SpaController::class, 'backdone']);
+Route::post('/donepost', [SpaController::class, 'donepost']);
 /*Reservation user ends*/
 
 Route::middleware([Authmidlleware::class])->group(function () {

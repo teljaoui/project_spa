@@ -46,7 +46,7 @@
     </nav>
     <nav class="phone">
         <ul class="px-3 pt-2">
-            <li class="logo"><a href=""><img src="img/logotop.png" alt=""
+            <li class="logo"><a href="/"><img src="img/logotop.png" alt=""
                         srcset=""><span>Spa</span></a>
             </li>
             <li>
