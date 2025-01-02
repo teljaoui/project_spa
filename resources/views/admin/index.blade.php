@@ -28,17 +28,19 @@
             @endif
             <div class="d-flex justify-content-between mx-5">
                 <div class="searchdate">
-                    <form action="" method="post">
+                    <form action="searchdate" method="post">
+                        @csrf
                         <div class="form-group">
-                            <input type="date" name="" class="form-control" id="" required>
+                            <input type="date" name="date_reserv" class="form-control" id="" required>
                             <input type="submit" class="btn btn-success border-0" value="Search">
                         </div>
                     </form>
                 </div>
                 <div class="searchcode">
-                    <form action="" method="post">
+                    <form action="searchid" method="post">
+                        @csrf
                         <div class="form-group">
-                            <input type="number" name="" class="form-control" id=""
+                            <input type="number" name="id" class="form-control" id=""
                                 placeholder="code client" required>
                             <input type="submit" class="btn btn-success border-0" value="Search">
                         </div>
@@ -63,20 +65,50 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($reservations as $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td class="phonetable">{{ $item->reservation }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
-                                <td>{{ $item->client->first_name }}</td>
-                                <td class="phonetable">{{ $item->client->last_name }}</td>
-                                <td>{{ $item->client->phone_number }}</td>
-                                <td>
-                                    <a href="/admin/reservation/{{ $item->id }}"
-                                        class="btn btn-info border-0 fw-bold text-white">Dtails</a>
-                                </td>
-                            </tr>
-                            @endforeach
+                            @if (isset($reservation))
+                                <tr>
+                                    <td>{{ $reservation->id }}</td>
+                                    <td class="phonetable">{{ $reservation->reservation }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($reservation->horaire->time)->format('h:i a') }}</td>
+                                    <td>{{ $reservation->client->first_name }}</td>
+                                    <td class="phonetable">{{ $reservation->client->last_name }}</td>
+                                    <td>{{ $reservation->client->phone_number }}</td>
+                                    <td>
+                                        <a href="/admin/reservation/{{ $reservation->id }}"
+                                            class="btn btn-info border-0 fw-bold text-white">Détails</a>
+                                    </td>
+                                </tr>
+                            @elseif (isset($reservation_date))
+                                @foreach ($reservation_date as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td class="phonetable">{{ $item->reservation }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
+                                        <td>{{ $item->client->first_name }}</td>
+                                        <td class="phonetable">{{ $item->client->last_name }}</td>
+                                        <td>{{ $item->client->phone_number }}</td>
+                                        <td>
+                                            <a href="/admin/reservation/{{ $item->id }}"
+                                                class="btn btn-info border-0 fw-bold text-white">Détails</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach ($reservations as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td class="phonetable">{{ $item->reservation }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
+                                        <td>{{ $item->client->first_name }}</td>
+                                        <td class="phonetable">{{ $item->client->last_name }}</td>
+                                        <td>{{ $item->client->phone_number }}</td>
+                                        <td>
+                                            <a href="/admin/reservation/{{ $item->id }}"
+                                                class="btn btn-info border-0 fw-bold text-white">Détails</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

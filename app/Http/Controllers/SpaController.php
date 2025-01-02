@@ -22,6 +22,32 @@ class SpaController extends Controller
             ->orderBy("time_id")->get();
         return view('admin/index', compact('clients', 'times', 'reservations'));
     }
+    public function searchid(Request $request)
+    {
+        $id = $request->input('id');
+        $times = Horaire::all();
+        $clients = Client::all();
+
+        $reservation = Reservation::with(['horaire', 'client'])->find($id);
+
+        if ($reservation) {
+            return view('admin.index', compact('clients', 'times', 'reservation'));
+        } else {
+            return redirect()->back()->with('error', 'Reservation not found');
+        }
+    }
+    public function searchdate(Request $request)
+    {
+        $date = $request->date_reserv;
+        $times = Horaire::all();
+        $clients = Client::all();
+        $reservation_date = Reservation::with(['horaire', 'client'])->where("reservation", "=", $date)->get();
+        if ($reservation_date) {
+            return view('admin.index', compact('clients', 'times', 'reservation_date'));
+        } else {
+            return redirect()->back()->with('error', 'Reservations not found');
+        }
+    }
     public function reservation($id)
     {
         $times = Horaire::all();
@@ -185,9 +211,9 @@ class SpaController extends Controller
         ]);
 
         $time = Horaire::where('id', $request->time)->value('time');
-        $time_id =  Horaire::where('id', $request->time)->value('id');
+        $time_id = Horaire::where('id', $request->time)->value('id');
         $request->session()->put('time', $time);
-        $request->session()->put('time_id' , $time_id);
+        $request->session()->put('time_id', $time_id);
 
         return redirect('/admin/add')->with('success', 'Time selected successfully!');
     }
@@ -238,29 +264,29 @@ class SpaController extends Controller
         $lastname = $request->session()->get('lastname');
         $phone_number = $request->session()->get('phone_number');
         $date = $request->session()->get('date');
-        $time =$request->session()->get('time');
+        $time = $request->session()->get('time');
         $user = $request->session()->get('user');
         $time_id = $request->session()->get('time_id');
-    
+
         if (!$firstname || !$lastname || !$phone_number || !$date || !$time_id) {
             return redirect('/admin/add')->with('error', 'Missing session data. Please try again.');
         }
-    
+
         $client = Client::create([
             'first_name' => $firstname,
             'last_name' => $lastname,
             'phone_number' => $phone_number,
         ]);
-    
+
         Reservation::create([
             'reservation' => $date,
             'time_id' => $time_id,
-            'user_id' => $client->id, 
+            'user_id' => $client->id,
         ]);
-    
-        $request->session()->forget(['firstname', 'lastname', 'phone_number', 'date', 'time','time_id' , 'user']);
-    
+
+        $request->session()->forget(['firstname', 'lastname', 'phone_number', 'date', 'time', 'time_id', 'user']);
+
         return redirect('/admin/add')->with('success', 'Reservation confirmed successfully!');
     }
-    
+
 }

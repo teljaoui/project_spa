@@ -31,13 +31,15 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::view('/updatepassword', 'admin.updatepassword')->name('admin.updatepassword');
         Route::view('/add', 'admin.add')->name('admin.add');
         Route::get('/past', [SpaController::class, 'past'])->name('admin.past');
-        Route::get('/   ', [SpaController::class, 'management'])->name('admin.management');
+        Route::get('/management', [SpaController::class, 'management'])->name('admin.management');
         Route::get('/reservation/{id}', [SpaController::class, 'reservation'])->name('admin.reservation');
         Route::get('/deletereservation/{id}', [SpaController::class, 'deletereservation']);
         Route::get('/delete', [SpaController::class, 'deleteAll']);
         Route::get('/backtime', [SpaController::class, 'backtime']);
         Route::get('/backuser', [SpaController::class, 'backuser']);
         Route::get('/backfinal' , [SpaController::class , 'backfinal']);
+        Route::post('/searchid' , [SpaController::class , 'searchid']);
+        Route::post('/searchdate' , [SpaController::class , 'searchdate']);
     });
 });
 
