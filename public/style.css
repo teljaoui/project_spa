@@ -223,6 +223,7 @@ li {
     background-image: url("img/background7.jpg");
     background-repeat: repeat;
     background-size: cover;
+    background-attachment: fixed;
     position: relative;
 }
 
@@ -1032,7 +1033,10 @@ footer .media i {
         font-size: 12px;
     }
 
-
+    .home-top {
+        background-attachment:scroll;
+    }
+    
     .home-top::before {
         content: '';
         position: absolute;
