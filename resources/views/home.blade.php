@@ -61,7 +61,7 @@
     <section class="home-reserve">
         <div class="text-center align-items-center py-5">
             <h5 class="pb-2">Offres spéciales</h5>
-            <p class="pb-3">"Prenez rendez-vous en un clic</p>
+            <p class="pb-3">Prenez rendez-vous en un clic</p>
             <a href="/appointment">Prenez un rendez-vous</a>
         </div>
     </section>
