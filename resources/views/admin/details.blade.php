@@ -21,10 +21,6 @@
                 <div>
                     <ul>
                         <li>
-                            <span>code:</span>
-                            <p>{{$reservation->id}}</p>
-                        </li>
-                        <li>
                             <span>Date de la visite:</span>
                             <p>{{$reservation->reservation}}</p>
                         </li>
