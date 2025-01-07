@@ -23,7 +23,6 @@
                     <table class="table datatable ">
                         <thead>
                             <tr>
-                                <th>code</th>
                                 <th class="phonetable">Date</th>
                                 <th>Heure</th>
                                 <th>Prénom</th>
@@ -32,28 +31,39 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($reservations as $item)
+                        @if (isset($reservations) && $reservations->count() > 0)
+                            <tbody>
+                                @foreach ($reservations as $item)
+                                    <tr>
+                                        <td class="phonetable">{{ $item->reservation }}</td>
+                                        <td>{{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }}
+                                        </td>
+                                        <td>{{ $item->client->first_name }}</td>
+                                        <td class="phonetable">{{ $item->client->last_name }}</td>
+                                        <td>{{ $item->client->phone_number }}</td>
+                                        <td>
+                                            <a href="/admin/reservation/{{ $item->id }}"
+                                                class="btn btn-info border-0 fw-bold text-white">Détails</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <div class="text-center">
+                                <a href="/admin/delete"
+                                    class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer tous les rendez-vous ?')">Supprimer
+                                    tout</a>
+                            </div>
+                        @else
+                            <tbody>
                                 <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td class="phonetable">{{ $item->reservation }}</td>
-                                    <td> {{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }} </td>
-                                    <td>{{ $item->client->first_name }}</td>
-                                    <td class="phonetable">{{ $item->client->last_name }}</td>
-                                    <td>{{ $item->client->phone_number }}</td>
-                                    <td>
-                                        <a href="/admin/reservation/{{ $item->id }}"
-                                            class="btn btn-info border-0 fw-bold text-white">Dtails</a>
-                                    </td>
+                                    <td colspan="6" class="text-center">Aucun rendez-vous trouvé</td>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </tbody>
+                        @endif
                     </table>
                 </div>
-                <div class="text-center">
-                    <a href="/admin/delete"
-                        class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete">Supprimer tout</a>
-                </div>
+
             </div>
         </div>
     </section>

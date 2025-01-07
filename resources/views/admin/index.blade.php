@@ -37,11 +37,11 @@
                     </form>
                 </div>
                 <div class="searchcode">
-                    <form action="searchid" method="post">
+                    <form action="searchphone" method="post">
                         @csrf
                         <div class="form-group">
-                            <input type="number" name="id" class="form-control" id=""
-                                placeholder="code client" required>
+                            <input type="number" name="phone_number" class="form-control" id=""
+                                placeholder="Téléphone" required>
                             <input type="submit" class="btn btn-success border-0" value="Recherche">
                         </div>
                     </form>
@@ -55,7 +55,6 @@
                     <table class="table datatable ">
                         <thead>
                             <tr>
-                                <th>code</th>
                                 <th class="phonetable">Date</th>
                                 <th>Heure</th>
                                 <th>Prénom</th>
@@ -65,23 +64,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (isset($reservation))
-                                <tr>
-                                    <td>{{ $reservation->id }}</td>
-                                    <td class="phonetable">{{ $reservation->reservation }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($reservation->horaire->time)->format('h:i a') }}</td>
-                                    <td>{{ $reservation->client->first_name }}</td>
-                                    <td class="phonetable">{{ $reservation->client->last_name }}</td>
-                                    <td>{{ $reservation->client->phone_number }}</td>
-                                    <td>
-                                        <a href="/admin/reservation/{{ $reservation->id }}"
-                                            class="btn btn-info border-0 fw-bold text-white">Détails</a>
-                                    </td>
-                                </tr>
-                            @elseif (isset($reservation_date))
-                                @foreach ($reservation_date as $item)
+                            @if (isset($reservations) && $reservations->isNotEmpty())
+                                @foreach ($reservations as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
                                         <td class="phonetable">{{ $item->reservation }}</td>
                                         <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
                                         <td>{{ $item->client->first_name }}</td>
@@ -94,22 +79,12 @@
                                     </tr>
                                 @endforeach
                             @else
-                                @foreach ($reservations as $item)
-                                    <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td class="phonetable">{{ $item->reservation }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
-                                        <td>{{ $item->client->first_name }}</td>
-                                        <td class="phonetable">{{ $item->client->last_name }}</td>
-                                        <td>{{ $item->client->phone_number }}</td>
-                                        <td>
-                                            <a href="/admin/reservation/{{ $item->id }}"
-                                                class="btn btn-info border-0 fw-bold text-white">Détails</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td colspan="6" class="text-center">Aucun rendez-vous trouvé</td>
+                                </tr>
                             @endif
                         </tbody>
+
                     </table>
                 </div>
             </div>

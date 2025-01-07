@@ -22,20 +22,28 @@ class SpaController extends Controller
             ->orderBy("time_id")->get();
         return view('admin/index', compact('clients', 'times', 'reservations'));
     }
-    public function searchid(Request $request)
+    public function searchphone(Request $request)
     {
-        $id = $request->id;
-        $times = Horaire::all();
+        $phone_number = $request->phone_number;
+        $client = Client::where("phone_number", $phone_number)->first();
+    
         $clients = Client::all();
-
-        $reservation = Reservation::with(['horaire', 'client'])->find($id);
-
-        if ($reservation) {
-            return view('admin.index', compact('clients', 'times', 'reservation'));
+        $times = Horaire::all();
+    
+        if ($client) {
+            $reservations = Reservation::with(['horaire', 'client'])
+                ->where('user_id', $client->id) 
+                ->get();
+            if ($reservations->isNotEmpty()) {
+                return view('admin.index', compact('clients', 'times', 'reservations'));
+            } else {
+                return redirect('admin/index')->with('error', 'Aucune réservation trouvée pour ce client');
+            }
         } else {
-            return redirect('admin/index')->with('error', 'Réservation introuvable');
-        }
+            return redirect('admin/index')->with('error', 'Aucun client trouvé avec ce numéro de téléphone');
+        } 
     }
+    
     public function searchdate(Request $request)
     {
         $date = $request->date_reserv;

@@ -64,5 +64,5 @@ Route::post('/admin/addPost', [SpaController::class, 'addPost']);
 Route::post('/admin/addtime', [SpaController::class, 'addtime']);
 Route::post('/admin/adduser', [SpaController::class, 'adduser']);
 Route::post('/admin/confirmed_admin', [SpaController::class, 'confirmed_admin']);
-Route::post('/admin/searchid', [SpaController::class, 'searchid']);
+Route::post('/admin/searchphone', [SpaController::class, 'searchphone']);
 Route::post('/admin/searchdate', [SpaController::class, 'searchdate']);
