@@ -20,7 +20,7 @@
             <div class="today">
                 <h6 class="title">Rendez-vous passé</h6>
                 <div class="table-responsive dataview">
-                    <table class="table datatable ">
+                    <table class="table datatable">
                         <thead>
                             <tr>
                                 <th class="phonetable">Date</th>
@@ -36,24 +36,16 @@
                                 @foreach ($reservations as $item)
                                     <tr>
                                         <td class="phonetable">{{ $item->reservation }}</td>
-                                        <td>{{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }}
-                                        </td>
+                                        <td>{{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }}</td>
                                         <td>{{ $item->client->first_name }}</td>
                                         <td class="phonetable">{{ $item->client->last_name }}</td>
                                         <td>{{ $item->client->phone_number }}</td>
                                         <td>
-                                            <a href="/admin/reservation/{{ $item->id }}"
-                                                class="btn btn-info border-0 fw-bold text-white">Détails</a>
+                                            <a href="/admin/reservation/{{ $item->id }}" class="btn btn-info border-0 fw-bold text-white">Détails</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <div class="text-center">
-                                <a href="/admin/delete"
-                                    class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer tous les rendez-vous ?')">Supprimer
-                                    tout</a>
-                            </div>
                         @else
                             <tbody>
                                 <tr>
@@ -62,12 +54,17 @@
                             </tbody>
                         @endif
                     </table>
-                </div>
 
+                    @if (isset($reservations) && $reservations->count() > 0)
+                        <div class="text-center">
+                            <a href="/admin/delete" class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer tous les rendez-vous ?')">Supprimer tout</a>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </section>
-
 
     <script src="/main.js"></script>
 

@@ -50,7 +50,7 @@
                     <p>Vérifiez les informations saisies.</p>
                     <div class="donne">
                         <div class="mb-4">
-                            <a href="backdone" class="back"><i class="fa-solid fa-arrow-left"></i>  Back</a>
+                            <a href="backdone" class="back"><i class="fa-solid fa-arrow-left"></i>  Retour</a>
                         </div>
                         <ul>
                             <li>
