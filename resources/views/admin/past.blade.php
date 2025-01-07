@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td class="phonetable">{{ $item->reservation }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
+                                    <td> {{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }} </td>
                                     <td>{{ $item->client->first_name }}</td>
                                     <td class="phonetable">{{ $item->client->last_name }}</td>
                                     <td>{{ $item->client->phone_number }}</td>
@@ -51,7 +51,8 @@
                     </table>
                 </div>
                 <div class="text-center">
-                    <a href="/admin/delete" class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete">Supprimer tout</a>
+                    <a href="/admin/delete"
+                        class="btn btn-danger border-0 fw-bold text-white w-50 confirmedelete">Supprimer tout</a>
                 </div>
             </div>
         </div>
