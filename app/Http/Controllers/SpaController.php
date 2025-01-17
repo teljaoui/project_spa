@@ -50,12 +50,12 @@ class SpaController extends Controller
         $times = Horaire::all();
         $clients = Client::all();
 
-        $reservation_date = Reservation::with(['horaire', 'client'])->whereDate('reservation', '=', $date)->get();
+        $reservations = Reservation::with(['horaire', 'client'])->whereDate('reservation', '=', $date)->get();
 
-        if ($reservation_date->isEmpty()) {
+        if ($reservations->isEmpty()) {
             return redirect('admin/index')->with('error', 'Aucune réservation trouvée pour cette date');
         } else {
-            return view('admin.index', compact('clients', 'times', 'reservation_date'));
+            return view('admin.index', compact('clients', 'times', 'reservations'));
         }
     }
 
