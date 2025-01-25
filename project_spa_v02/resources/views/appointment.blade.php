@@ -25,46 +25,46 @@
             </svg>
         </div>
         <div class="container py-5 mb-5">
-            <div class="header-appointment">
-                <div class="row">
-                    <div class="col-3">
-                        <span class="active">1. <strong>Temps</strong></span>
-                        <hr class="active">
-                    </div>
-                    <div class="col-3">
-                        <span>2. <strong>Horaires disponibles</strong></span>
-                        <hr>
-                    </div>
-                    <div class="col-3">
-                        <span>3. <strong>Confirmation</strong></span>
-                        <hr>
-                    </div>
-                    <div class="col-3">
-                        <span>4. <strong>Terminé</strong></span>
-                        <hr>
-                    </div>
+            <div class="available my-2">
+                <div class="confirmed">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form action="add_appointment" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 my-2">
+                                <label for="" class="form-label">Date de visite</label>
+                                <input type="date" class="form-control" name="date_visite" required>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 my-2">
+                                <label for="" class="form-label">Heure de visite</label>
+                                <input type="time" class="form-control" name="heure_de_visite" required>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 my-2">
+                                <label for="" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" name="first_name" required>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 my-2">
+                                <label for="" class="form-label">Nom</label>
+                                <input type="text" class="form-control" name="last_name" required>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 my-2">
+                                <label for="" class="form-label">Numéro de Téléphone</label>
+                                <input type="text" class="form-control" name="phone_number" required>
+                            </div>
+                            <div class="col-12 my-2 text-center">
+                                <button type="submit" class="next">Confirmé</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="content">
-                <form action="appointmentpost" method="post">
-                    @csrf
-                    <div class="form-group text-center">
-                        <p>Veuillez sélectionner la date de votre visite..</p>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @elseif(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-                        <input type="date" id="date-select" name="date_reserve" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="submit" value="Suivant">
-                    </div>
-                </form>
             </div>
         </div>
     </section>

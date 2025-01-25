@@ -22,28 +22,28 @@
                     <ul>
                         <li>
                             <span>Date de la visite:</span>
-                            <p>{{$reservation->reservation}}</p>
+                            <p>{{$reservation->date_visite}}</p>
                         </li>
                         <li>
                             <span>Heure de la visite :</span>
-                            <p>{{ \Carbon\Carbon::parse($reservation->horaire->time)->format('h:i a') }}</p>
+                            <p>{{ \Carbon\Carbon::parse($reservation->heure_de_visite)->format('h:i a') }}</p>
                         </li>
                         <li>
                             <span>Prénom:</span>
-                            <p>{{$reservation->client->first_name}}</p>
+                            <p>{{$reservation->first_name}}</p>
                         </li>
                         <li>
                             <span>Nom:</span>
-                            <p>{{$reservation->client->last_name}}</p>
+                            <p>{{$reservation->last_name}}</p>
                         </li>
                         <li>
                             <span>Numéro de Téléphone:</span>
-                            <p>{{$reservation->client->phone_number}}</p>
+                            <p>{{$reservation->phone_number}}</p>
                         </li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="tel:{{$reservation->client->phone_number}}" class="call"><i class="bi bi-telephone-forward"></i>Appel</a>
+                    <a href="tel:{{$reservation->phone_number}}" class="call"><i class="bi bi-telephone-forward"></i>Appel</a>
                     <a href="/admin/deletereservation/{{$reservation->id}}" class="btn btn-danger fw-bold confirmedelete">Supprimer</a>
                 </div>
             </div>

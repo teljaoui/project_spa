@@ -50,7 +50,11 @@
         </div>
         <div class="container">
             <div class="today">
-                <h6 class="title">Rendez-vous du jour</h6>
+                @if (isset($title))
+                    <h6 class="title">{{ $title }}</h6>
+                @else
+                    <h6 class="title">Rendez-vous du jour</h6>
+                @endif
                 <div class="table-responsive dataview">
                     <table class="table datatable ">
                         <thead>
@@ -67,11 +71,11 @@
                             @if (isset($reservations) && $reservations->isNotEmpty())
                                 @foreach ($reservations as $item)
                                     <tr>
-                                        <td class="phonetable">{{ $item->reservation }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') }}</td>
-                                        <td>{{ $item->client->first_name }}</td>
-                                        <td class="phonetable">{{ $item->client->last_name }}</td>
-                                        <td>{{ $item->client->phone_number }}</td>
+                                        <td class="phonetable">{{ $item->date_visite }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->heure_de_visite)->format('h:i a') }}</td>
+                                        <td>{{ $item->first_name }}</td>
+                                        <td class="phonetable">{{ $item->last_name }}</td>
+                                        <td>{{ $item->phone_number }}</td>
                                         <td>
                                             <a href="/admin/reservation/{{ $item->id }}"
                                                 class="btn btn-info border-0 fw-bold text-white">Détails</a>
