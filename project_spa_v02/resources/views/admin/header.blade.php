@@ -12,8 +12,6 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="/admin/index"><i
                                 class="fa-solid fa-calendar-week"></i><span>Rendez-vous d'aujourd'hui</span></a></li>
-                    <li><a class="dropdown-item" href="/admin/management"><i
-                                class="fa-solid fa-list-check"></i><span>Gestion des rendez-vous</span></a></li>
                     <li><a class="dropdown-item" href="/admin/add"><i class="fa-solid fa-calendar-plus"></i><span>Ajouter un rendez-vous</span></a></li>
                     <li><a class="dropdown-item" href="/admin/past"><i class="fa-solid fa-outdent"></i><span>Rendez-vous passé</span></a></li>
                     <li><a class="dropdown-item" href="/admin/updatepassword"><i

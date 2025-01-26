@@ -51,6 +51,7 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::get('/backtime', [SpaController::class, 'backtime']);
         Route::get('/backuser', [SpaController::class, 'backuser']);
         Route::get('/backfinal', [SpaController::class, 'backfinal']);
+        Route::view('/services' , 'services')->name('services');
 
     });
 });

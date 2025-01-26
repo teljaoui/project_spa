@@ -149,7 +149,6 @@ class SpaController extends Controller
                 'date_visite' => $request->date_visite,
                 'heure_de_visite' => $request->heure_de_visite,
             ]);
-
             return redirect('/appointment')->with('success', 'Réservation confirmée avec succès !');
         }
     }
@@ -172,5 +171,4 @@ class SpaController extends Controller
             return redirect('/admin/add')->with('success', 'Réservation confirmée avec succès !');
         }
     }
-
 }
