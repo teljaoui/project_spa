@@ -18,52 +18,75 @@
         <div class="container my-5">
             <div class="today">
                 <h6 class="title">Gestion des rendez-vous</h6>
-                <form action="/admin/timePost" method="POST">
+                <form action="/admin/getservice" method="POST">
                     @csrf
                     <div class="">
                         <div class="form-group">
-                            <label for="">Ajouter un rendez-vous.</label>
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @elseif(session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-                            <div class="row my-3">
+                            <label for="service">Ajouter un rendez-vous</label>
+                            <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                    <label for="" class="form-label">Heure</label>
-                                    <input type="time" class="form-control" name="time" required>
+                                    <select name="service" id="service" class="form-select" required>
+                                        <option value="" disabled selected>--Sélectionner un service</option>
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id }}">{{ $service->designation }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div>
-                                    <input type="submit" value="Ajouter" class="btn btn-success border-0">
+                                    <input type="submit" value="Obtenir" class="btn btn-success border-0">
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </form>
-                <form>
+                @if (session('getservice'))
+                    <form action="/admin/timePost" method="POST">
+                        @csrf
+                        <div class="">
+                            <div class="form-group">
+                                <label for="">Ajouter un rendez-vous.</label>
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+                                <div class="row my-3">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 my-2">
+                                        <label for="" class="form-label">Heure</label>
+                                        <input type="time" class="form-control" name="time" required>
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="Ajouter" class="btn btn-success border-0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <div class="">
                         <div class="form-group">
                             <label for="">Lister les rendez-vous</label>
                         </div>
                     </div>
-                </form>
-                <div class="d-flex justify-content-between list-time">
-                    <div>
-                        @foreach ($times as $time)
-                            <div class="admin-time">{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span>
-                                <form action="/admin/timdelete" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $time->id }}">
-                                    <button type="submit" class="confirmedelete"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
-                            </div>
-                        @endforeach
+                    <div class="d-flex justify-content-between list-time">
+                        <div>
+                            @foreach ($times as $time)
+                                <div class="admin-time">{{ \Carbon\Carbon::parse($time->time)->format('h:i a') }}</span>
+                                    <form action="/admin/timdelete" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $time->id }}">
+                                        <button type="submit" class="confirmedelete"><i
+                                                class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
     </section>
 

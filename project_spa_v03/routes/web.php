@@ -43,6 +43,7 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::view('/add', 'admin.add')->name('admin.add');
         Route::get('/past', [SpaController::class, 'past'])->name('admin.past');
         Route::get('/management', [SpaController::class, 'management'])->name('admin.management');
+        Route::post('/getservice' , [SpaController::class , 'getservice']);
         Route::get('/reservation/{id}', [SpaController::class, 'reservation'])->name('admin.reservation');
         Route::get('/deletereservation/{id}', [SpaController::class, 'deletereservation']);
         Route::get('/delete', [SpaController::class, 'deleteAll']);

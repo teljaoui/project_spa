@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Session;
 
 class SpaController extends Controller
 {
-    public function home(){
+    public function home()
+    {
         $services = Service::all();
-        return view('home' , compact('services'));
+        return view('home', compact('services'));
     }
     public function index()
     {
@@ -174,25 +175,47 @@ class SpaController extends Controller
     }
     public function management()
     {
-        $times = Horaire::orderBy('time', 'asc')->get();
-        return view('admin/management', compact('times'));
+        $services = Service::all();
+        $times = collect(); 
+    
+        if (session('getservice')) {
+            $times = Horaire::where('id_service', '=', session('getservice'))->orderBy('time', 'asc')->get();
+        }
+    
+        return view('admin.management', compact('times', 'services'));
     }
-    public function timePost(Request $request)
+    public function getservice(Request $request)
+    {
+        $times = Horaire::where('id_service', '=', $request->service)->get();
+        $services = Service::all();
+
+        if ($times->count() > 0) {
+            $request->session()->put('getservice', $request->service);
+        } else {
+            session()->flash('error', 'Aucun horaire disponible pour ce service.');
+        }
+
+        return view('admin.management', compact('times', 'services'));
+    }public function timePost(Request $request)
     {
         try {
-            $request->validate([
-                'time' => 'required|date_format:H:i'
-            ]);
-
-            Horaire::create([
-                'time' => $request->time
-            ]);
-            session()->flash('success', 'Heure ajoutée avec succès.');
+            if (session()->has('getservice')) {
+                Horaire::create([
+                    'time' => $request->time,
+                    'id_service' => session()->get('getservice'),
+                ]);
+    
+                session()->flash('success', 'Heure ajoutée avec succès.');
+            } else {
+                session()->flash('error', 'Aucun service sélectionné. Veuillez d\'abord sélectionner un service.');
+            }
         } catch (\Exception $e) {
             session()->flash('error', "Erreur lors de l'ajout de l'heure : " . $e->getMessage());
         }
+    
         return redirect('/admin/management');
     }
+    
     public function timdelete(Request $request)
     {
         try {
@@ -466,7 +489,7 @@ class SpaController extends Controller
 
             session()->flash('success', 'Service ajoutée avec succès.');
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue lors de l\'ajout de service. Assurez-vous de remplir tous les champs et de ne pas répéter les Services.' );
+            session()->flash('error', 'Une erreur est survenue lors de l\'ajout de service. Assurez-vous de remplir tous les champs et de ne pas répéter les Services.');
         }
 
         return redirect('/admin/services');
