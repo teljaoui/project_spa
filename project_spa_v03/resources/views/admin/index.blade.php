@@ -59,6 +59,7 @@
                                 <th>Heure</th>
                                 <th>Prénom</th>
                                 <th class="phonetable">Nom</th>
+                                <th>Service</th>
                                 <th>Téléphone</th>
                                 <th>Action</th>
                             </tr>

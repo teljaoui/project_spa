@@ -13,7 +13,7 @@
                     <li><a class="dropdown-item" href="/admin/index"><i
                                 class="fa-solid fa-calendar-week"></i><span>Rendez-vous d'aujourd'hui</span></a></li>
                     <li>
-                        <a  href="/admin/services" class="dropdown-men">
+                        <a  href="/admin/services" class="dropdown-item">
                             <i class="fa-solid fa-list"></i>
                             <span>Gestion des Services</span>
                         </a>

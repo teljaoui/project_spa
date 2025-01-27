@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Horaire;
 use App\Models\Reservation;
+use App\Models\Service;
 use App\Models\User;
 use Carbon\Carbon;
 use Hash;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Session;
 
 class SpaController extends Controller
 {
+    public function home(){
+        $services = Service::all();
+        return view('home' , compact('services'));
+    }
     public function index()
     {
         $times = Horaire::all();
@@ -26,13 +31,13 @@ class SpaController extends Controller
     {
         $phone_number = $request->phone_number;
         $client = Client::where("phone_number", $phone_number)->first();
-    
+
         $clients = Client::all();
         $times = Horaire::all();
-    
+
         if ($client) {
             $reservations = Reservation::with(['horaire', 'client'])
-                ->where('user_id', $client->id) 
+                ->where('user_id', $client->id)
                 ->get();
             if ($reservations->isNotEmpty()) {
                 return view('admin.index', compact('clients', 'times', 'reservations'));
@@ -41,9 +46,9 @@ class SpaController extends Controller
             }
         } else {
             return redirect('admin/index')->with('error', 'Aucun client trouvé avec ce numéro de téléphone');
-        } 
+        }
     }
-    
+
     public function searchdate(Request $request)
     {
         $date = $request->date_reserv;
@@ -436,6 +441,50 @@ class SpaController extends Controller
         ]);
 
         return redirect('/appointment')->with('success', 'Réservation confirmée avec succès !');
+    }
+
+
+
+    public function services()
+    {
+        $services = Service::all();
+        return view('admin/service', compact('services'));
+    }
+    public function addservicepost(Request $request)
+    {
+        try {
+            $designation = str_replace(' ', '_', $request->get('designation'));
+            $file_name = uniqid() . "." . $request->file("service_image")->extension();
+
+            $request->file("service_image")->move(public_path('img'), $file_name);
+
+            Service::create([
+                'designation' => $designation,
+                'service_image' => $file_name,
+                'nb_reservation' => $request->nb_reservation
+            ]);
+
+            session()->flash('success', 'Service ajoutée avec succès.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Une erreur est survenue lors de l\'ajout de service. Assurez-vous de remplir tous les champs et de ne pas répéter les Services.' );
+        }
+
+        return redirect('/admin/services');
+    }
+
+    public function servicedelete($id)
+    {
+        $service = Service::find($id);
+        try {
+            if ($service) {
+                $service->delete();
+            }
+            session()->flash('success', 'Service Supprimé avec succès.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Une erreur est survenue lors de la suppréssion de service.' . $e);
+        }
+        return redirect('/admin/services');
+
     }
 
 }

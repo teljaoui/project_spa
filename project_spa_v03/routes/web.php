@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [SpaController::class   , 'home']);
 Route::get('/admin/login', function () {
     return view('admin.login');
 })->name('admin.login');
@@ -51,7 +49,8 @@ Route::middleware([Authmidlleware::class])->group(function () {
         Route::get('/backtime', [SpaController::class, 'backtime']);
         Route::get('/backuser', [SpaController::class, 'backuser']);
         Route::get('/backfinal', [SpaController::class, 'backfinal']);
-        Route::view('/services' , 'services')->name('services');
+        Route::get('/services' , [SpaController::class, 'services']);
+        Route::get('/servicedelete/{id}' , [SpaController::class , 'servicedelete']);
 
     });
 });
@@ -67,3 +66,4 @@ Route::post('/admin/adduser', [SpaController::class, 'adduser']);
 Route::post('/admin/confirmed_admin', [SpaController::class, 'confirmed_admin']);
 Route::post('/admin/searchphone', [SpaController::class, 'searchphone']);
 Route::post('/admin/searchdate', [SpaController::class, 'searchdate']);
+Route::post('admin/addservicepost' , [SpaController::class  , 'addservicepost']);
