@@ -48,7 +48,7 @@
                                             height="50" alt="Service Image">
 
                                     </td>
-                                    <td>{{ $service->designation }}</td>
+                                    <td>{{ strtr($service->designation, ['_' => ' ']) }}</td>
                                     <td>
                                         <a href="/admin/servicedelete/{{ $service->id }}"
                                             class="btn btn-danger border-0 fw-bold text-white">Delete</a>

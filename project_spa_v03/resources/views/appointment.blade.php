@@ -44,8 +44,13 @@
                                 <input type="date" class="form-control" name="date_visite" required>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                <label for="" class="form-label">Heure de visite</label>
-                                <input type="time" class="form-control" name="heure_de_visite" required>
+                                <label for="" class="form-label">Service</label>
+                                <select name="service_id" id="" class="form-control" required>
+                                    <option value="" disabled selected>--selectionné un service</option>
+                                    @foreach ($services as $service)
+                                    <option value="{{$service->id}}">{{ strtr($service->designation, ['_' => ' ']) }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 my-2">
                                 <label for="" class="form-label">Prénom</label>

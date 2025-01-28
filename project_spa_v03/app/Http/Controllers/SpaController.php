@@ -12,15 +12,23 @@ use Illuminate\Support\Facades\Session;
 
 class SpaController extends Controller
 {
-    public function home(){
+    public function home()
+    {
         $services = service::all();
-return view('home' , compact('services'));
+        return view('home', compact('services'));
+    }
+    public function appointment(){
+        $services = service::all();
+
+        return view('appointment' , compact('services'));
     }
     public function index()
     {
-        $reservations = Reservation::whereDate('date_visite', '=', Carbon::today()->toDateString())
-            ->orderBy("heure_de_visite")->get();
-        return view('admin/index', compact('reservations' ));
+        $reservations = Reservation::with('service') 
+        ->whereDate('date_visite', '=', Carbon::today()->toDateString())
+        ->get();
+
+        return view('admin/index', compact('reservations'));
     }
     public function searchphone(Request $request)
     {
@@ -28,7 +36,7 @@ return view('home' , compact('services'));
         $reservations = Reservation::where("phone_number", "=", $phone_number)->get();
         $title = "Résultat de la recherche";
         if ($reservations->isNotEmpty()) {
-            return view('admin.index', compact('reservations' , 'title'));
+            return view('admin.index', compact('reservations', 'title'));
         } else {
             return redirect('admin/index')->with('error', 'Aucune réservation trouvée pour ce client');
         }
@@ -69,8 +77,7 @@ return view('home' , compact('services'));
 
     public function past()
     {
-        $reservations = Reservation::whereDate('date_visite', '<', Carbon::today()->toDateString())
-            ->orderBy("heure_de_visite")->get();
+        $reservations = Reservation::whereDate('date_visite', '<', Carbon::today()->toDateString())->get();
         return view('admin/past', compact('reservations'));
     }
     public function deleteAll()
@@ -143,40 +150,37 @@ return view('home' , compact('services'));
     {
         if ($request->date_visite < Carbon::today()->toDateString()) {
             return redirect('/appointment')->with('error', 'la date invalide!');
-        } elseif ($request->heure_de_visite < Carbon::now()->toTimeString()) {
-            return redirect('/appointment')->with('error', "l'heure invalide!");
-
-        } else {
+        }else {
             Reservation::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone_number' => $request->phone_number,
                 'date_visite' => $request->date_visite,
-                'heure_de_visite' => $request->heure_de_visite,
+                'service_id' => $request->service_id,
             ]);
             return redirect('/appointment')->with('success', 'Réservation confirmée avec succès !');
         }
+    }
+
+    public function add(){
+        $services = service::all();
+        return view('admin/add' , compact('services'));
     }
     public function add_appointment_admin(Request $request)
     {
         if ($request->date_visite < Carbon::today()->toDateString()) {
             return redirect('/admin/add')->with('error', 'la date invalide!');
-        } elseif ($request->heure_de_visite < Carbon::now()->toTimeString()) {
-            return redirect('/admin/add')->with('error', "l'heure invalide!");
-
-        } else {
+        }else {
             Reservation::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone_number' => $request->phone_number,
                 'date_visite' => $request->date_visite,
-                'heure_de_visite' => $request->heure_de_visite,
+                'service_id' => $request->service_id,
             ]);
-
             return redirect('/admin/add')->with('success', 'Réservation confirmée avec succès !');
         }
     }
-
     public function services()
     {
         $services = service::all();
@@ -197,7 +201,7 @@ return view('home' , compact('services'));
 
             session()->flash('success', 'Service ajoutée avec succès.');
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue lors de l\'ajout de service. Assurez-vous de remplir tous les champs et de ne pas répéter les Services.' );
+            session()->flash('error', 'Une erreur est survenue lors de l\'ajout de service. Assurez-vous de remplir tous les champs et de ne pas répéter les Services.');
         }
 
         return redirect('/admin/services');

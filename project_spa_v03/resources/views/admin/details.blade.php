@@ -25,8 +25,8 @@
                             <p>{{$reservation->date_visite}}</p>
                         </li>
                         <li>
-                            <span>Heure de la visite :</span>
-                            <p>{{ \Carbon\Carbon::parse($reservation->heure_de_visite)->format('h:i a') }}</p>
+                            <span>Service</span>
+                            <p>{{ strtr($reservation->service->designation, ['_' => ' ']) }}</p>
                         </li>
                         <li>
                             <span>Prénom:</span>

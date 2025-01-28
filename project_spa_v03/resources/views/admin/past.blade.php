@@ -24,7 +24,6 @@
                         <thead>
                             <tr>
                                 <th class="phonetable">Date</th>
-                                <th>Heure</th>
                                 <th>Prénom</th>
                                 <th class="phonetable">Nom</th>
                                 <th>Téléphone</th>
@@ -36,7 +35,6 @@
                                 @foreach ($reservations as $item)
                                     <tr>
                                         <td class="phonetable">{{ $item->date_viste }}</td>
-                                        <td>{{ $item->heure_de_visite ? \Carbon\Carbon::parse($item->heure_de_visite)->format('h:i a') : 'Non défini' }}</td>
                                         <td>{{ $item->first_name }}</td>
                                         <td class="phonetable">{{ $item->last_name }}</td>
                                         <td>{{ $item->phone_number }}</td>

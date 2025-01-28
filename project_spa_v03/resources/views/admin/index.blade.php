@@ -60,9 +60,9 @@
                         <thead>
                             <tr>
                                 <th class="phonetable">Date</th>
-                                <th>Heure</th>
                                 <th>Prénom</th>
                                 <th class="phonetable">Nom</th>
+                                <th>Service</th>
                                 <th>Téléphone</th>
                                 <th>Action</th>
                             </tr>
@@ -72,9 +72,9 @@
                                 @foreach ($reservations as $item)
                                     <tr>
                                         <td class="phonetable">{{ $item->date_visite }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->heure_de_visite)->format('h:i a') }}</td>
                                         <td>{{ $item->first_name }}</td>
                                         <td class="phonetable">{{ $item->last_name }}</td>
+                                        <td>{{ strtr($item->service->designation, ['_' => ' '])  }}</td>
                                         <td>{{ $item->phone_number }}</td>
                                         <td>
                                             <a href="/admin/reservation/{{ $item->id }}"

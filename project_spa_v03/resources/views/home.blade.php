@@ -33,7 +33,7 @@
                     @foreach ($services as $service)
                         <div class="item">
                             <img src="img/{{ $service->service_image }}" alt="">
-                            <p>{{ $service->designation }}</p>
+                            <p>{{ strtr($service->designation, ['_' => ' ']) }}</p>
                         </div>
                     @endforeach
                 </div>

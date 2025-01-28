@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone_number');
             $table->date('date_visite');
-            $table->time('heure_de_visite');
             $table->timestamps();
         });
     }
