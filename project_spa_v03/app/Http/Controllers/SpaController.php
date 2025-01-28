@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\Session;
 
 class SpaController extends Controller
 {
+    public function home(){
+        $services = service::all();
+return view('home' , compact('services'));
+    }
     public function index()
     {
         $reservations = Reservation::whereDate('date_visite', '=', Carbon::today()->toDateString())
             ->orderBy("heure_de_visite")->get();
-        return view('admin/index', compact('reservations'));
+        return view('admin/index', compact('reservations' ));
     }
     public function searchphone(Request $request)
     {
@@ -175,7 +179,7 @@ class SpaController extends Controller
 
     public function services()
     {
-        $services = Service::all();
+        $services = service::all();
         return view('admin/services', compact('services'));
     }
     public function addservicepost(Request $request)
@@ -189,7 +193,6 @@ class SpaController extends Controller
             Service::create([
                 'designation' => $designation,
                 'service_image' => $file_name,
-                'nb_reservation' => $request->nb_reservation
             ]);
 
             session()->flash('success', 'Service ajoutée avec succès.');

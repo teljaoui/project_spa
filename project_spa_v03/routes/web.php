@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [SpaController::class , 'home']);
 Route::get('/admin/login', function () {
     return view('admin.login');
 })->name('admin.login');

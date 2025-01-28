@@ -37,7 +37,6 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Designation</th>
-                                <th>NB client</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -50,7 +49,6 @@
 
                                     </td>
                                     <td>{{ $service->designation }}</td>
-                                    <td>{{ $service->nb_reservation }}</td>
                                     <td>
                                         <a href="/admin/servicedelete/{{ $service->id }}"
                                             class="btn btn-danger border-0 fw-bold text-white">Delete</a>
@@ -72,17 +70,13 @@
                         <div class="">
                             <div class="form-group">
                                 <div class="row my-3">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 my-2">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 my-2">
                                         <label for="" class="form-label">Nom du Service: </label>
                                         <input type="text" class="form-control" name="designation" required>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 my-2">
                                         <label for="" class="form-label">Image du service: </label>
                                         <input type="file" class="form-control" name="service_image" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 my-2">
-                                        <label for="" class="form-label">Nomber des reservation: </label>
-                                        <input type="number" class="form-control" name="nb_reservation" required>
                                     </div>
                                 </div>
                             </div>

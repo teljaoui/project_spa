@@ -13,7 +13,7 @@
 </head>
 
 <body>
-   @include('layout/header')
+    @include('layout/header')
     <section class="home-top" id="home-top">
         <div class="content">
             <h5>Services de beauté</h5>
@@ -30,30 +30,12 @@
             </div>
             <div class="services-content">
                 <div class="services">
-                    <div class="item">
-                        <img src="img/service1.jpg" alt="">
-                        <p>Soins du visage</p>
-                    </div>
-                    <div class="item">
-                        <img src="img/service2.jpg" alt="">
-                        <p>Massages</p>
-                    </div>
-                    <div class="item">
-                        <img src="img/service3.jpg" alt="">
-                        <p>Soins corporels</p>
-                    </div>
-                    <div class="item">
-                        <img src="img/service4.jpg" alt="">
-                        <p>Manucure et pédicure</p>
-                    </div>
-                    <div class="item">
-                        <img src="img/service5.jpg" alt="">
-                        <p>Services de coiffure</p>
-                    </div>
-                    <div class="item">
-                        <img src="img/service6.jpg" alt="">
-                        <p>Épilation</p>
-                    </div>
+                    @foreach ($services as $service)
+                        <div class="item">
+                            <img src="img/{{ $service->service_image }}" alt="">
+                            <p>{{ $service->designation }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

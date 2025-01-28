@@ -11,7 +11,7 @@ class service extends Model
 
     protected $fillable = [
         'service_image',
-        'desigantion'
+        'designation'
     ];
 
     public  function Reservation(){
