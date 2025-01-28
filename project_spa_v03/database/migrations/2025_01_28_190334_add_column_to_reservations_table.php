@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->foreignId('id_service');
-            $table->foreign('id_service')->references('id')->on('services')->onDelete('cascade');
+            $table->foreignId('service_id');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->dropColumn(['id_service']);
+            //
         });
     }
 };

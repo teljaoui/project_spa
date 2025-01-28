@@ -30,12 +30,30 @@
             </div>
             <div class="services-content">
                 <div class="services">
-                    @foreach ($services as $service)
                     <div class="item">
-                        <img src="{{ asset('../img/' . $service->service_image) }}" alt="">
-                        <p>{{$service->designation}}</p>
+                        <img src="img/service1.jpg" alt="">
+                        <p>Soins du visage</p>
                     </div>
-                    @endforeach
+                    <div class="item">
+                        <img src="img/service2.jpg" alt="">
+                        <p>Massages</p>
+                    </div>
+                    <div class="item">
+                        <img src="img/service3.jpg" alt="">
+                        <p>Soins corporels</p>
+                    </div>
+                    <div class="item">
+                        <img src="img/service4.jpg" alt="">
+                        <p>Manucure et pédicure</p>
+                    </div>
+                    <div class="item">
+                        <img src="img/service5.jpg" alt="">
+                        <p>Services de coiffure</p>
+                    </div>
+                    <div class="item">
+                        <img src="img/service6.jpg" alt="">
+                        <p>Épilation</p>
+                    </div>
                 </div>
             </div>
         </div>

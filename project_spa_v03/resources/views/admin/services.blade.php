@@ -11,13 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Services</title>
 </head>
-<!--
-    
-time relation avec tabel service
 
-chaque service en personalisé le nomber de clients posible pour réservé la réservation
-
--->
 
 <body>
     @include('admin.header')

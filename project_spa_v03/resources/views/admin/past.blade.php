@@ -35,11 +35,11 @@
                             <tbody>
                                 @foreach ($reservations as $item)
                                     <tr>
-                                        <td class="phonetable">{{ $item->reservation }}</td>
-                                        <td>{{ $item->horaire ? \Carbon\Carbon::parse($item->horaire->time)->format('h:i a') : 'Non défini' }}</td>
-                                        <td>{{ $item->client->first_name }}</td>
-                                        <td class="phonetable">{{ $item->client->last_name }}</td>
-                                        <td>{{ $item->client->phone_number }}</td>
+                                        <td class="phonetable">{{ $item->date_viste }}</td>
+                                        <td>{{ $item->heure_de_visite ? \Carbon\Carbon::parse($item->heure_de_visite)->format('h:i a') : 'Non défini' }}</td>
+                                        <td>{{ $item->first_name }}</td>
+                                        <td class="phonetable">{{ $item->last_name }}</td>
+                                        <td>{{ $item->phone_number }}</td>
                                         <td>
                                             <a href="/admin/reservation/{{ $item->id }}" class="btn btn-info border-0 fw-bold text-white">Détails</a>
                                         </td>

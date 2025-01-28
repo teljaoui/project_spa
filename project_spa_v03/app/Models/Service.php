@@ -5,20 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class service extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'service_image',
-        'designation',
-        'nb_reservation'
+        'desigantion'
     ];
-    public function Horaire(){
-        return $this->belongsTo(Horaire::class);
-    }
 
-    public function Reservation(){
+    public  function Reservation(){
         return $this->hasMany(Reservation::class);
     }
 }

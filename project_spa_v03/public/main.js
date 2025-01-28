@@ -7,27 +7,27 @@ function closenavhome() {
     show.style.top = "-1000%"
 }
 
+
 function openForm() {
-const closeBtn = document.querySelector('.close');
-const openBtn = document.querySelector('.open');
-const serviceAdd = document.querySelector('.service_add');
-
-closeBtn.style.display = "inline-block"; // Affiche le bouton "Fermer"
-openBtn.style.display = "none"; // Cache le bouton "Ajouter"
-serviceAdd.style.display = "block"; // Affiche le formulaire
-}
-
-function closeForm() {
-const openBtn = document.querySelector('.open');
-const closeBtn = document.querySelector('.close');
-const serviceAdd = document.querySelector('.service_add');
-
-openBtn.style.display = "inline-block"; // Réaffiche le bouton "Ajouter"
-closeBtn.style.display = "none"; // Cache le bouton "Fermer"
-serviceAdd.style.display = "none"; // Cache le formulaire
-}
-
-
+    const closeBtn = document.querySelector('.close');
+    const openBtn = document.querySelector('.open');
+    const serviceAdd = document.querySelector('.service_add');
+    
+    closeBtn.style.display = "inline-block"; 
+    openBtn.style.display = "none"; 
+    serviceAdd.style.display = "block"; 
+    }
+    
+    function closeForm() {
+    const openBtn = document.querySelector('.open');
+    const closeBtn = document.querySelector('.close');
+    const serviceAdd = document.querySelector('.service_add');
+    
+    openBtn.style.display = "inline-block"; 
+    closeBtn.style.display = "none";
+    serviceAdd.style.display = "none"; 
+    }
+    
 
 document.querySelector('.logout').addEventListener("click", function (event) {
     if (!confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {

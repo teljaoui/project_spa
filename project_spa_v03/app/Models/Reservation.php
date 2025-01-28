@@ -9,18 +9,10 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reservation', 'user_id', 'time_id' , 'id_service'];
+    protected $fillable = ['first_name' , 'last_name' , 'phone_number' , 'date_visite', 'heure_de_visite'];
 
-    public function horaire()
-    {
-        return $this->belongsTo(Horaire::class, 'time_id');
-    }
-    
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'user_id');
-    }
     public function Service(){
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Reservation::class);
     }
+
 }

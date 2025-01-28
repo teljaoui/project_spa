@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('service_image');
-            $table->string('designation');
-            $table->integer('nb_reservation');
+            $table->string('desigantion');
             $table->timestamps();
         });
     }
